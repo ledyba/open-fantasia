@@ -1,8 +1,7 @@
 .PHONY: web test
 
 web:
-	`npm bin`/webpack
-	python -m SimpleHTTPServer 8000
+	npm run server
 
 test:
 	npm run test

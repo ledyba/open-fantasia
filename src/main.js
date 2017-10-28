@@ -1,5 +1,11 @@
+import Fantasia from './Fantasia.js'
 
 function main() {
-  console.log("hey");
+  let fantasia = new Fantasia();
+  fantasia.start(document.body);
+  window.requestAnimationFrame(() => {
+    fantasia.run();
+  });
 }
+
 main();
