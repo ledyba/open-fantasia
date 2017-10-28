@@ -1,0 +1,23 @@
+{
+  "name": "fantasia",
+  "version": "0.0.1",
+  "description": "An imaginary, but really existing social game.",
+  "main": "main.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --require babel-register --recursive $(find . -type f -name '*.spec.js' -not -path './node_modules/*')"
+  },
+  "keywords": [
+    "kirara"
+  ],
+  "author": "open-kirara project",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "webpack": "^3.8.1"
+  }
+}
