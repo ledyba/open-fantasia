@@ -11,6 +11,9 @@ export default class Scene {
 
     /** @type {PIXI.Container} */
     this.stage = new PIXI.Container();
+
+    /** @type {PIXI.loaders.Loader} */
+    this.loader = new PIXI.loaders.Loader();
   }
 
   /**
