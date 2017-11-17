@@ -67,6 +67,9 @@
 
 リクルート子会社に毎日放火する「リクルート殲滅部」のおんなのこ４人が主人公のまんがタイムきらら新連載「今日も１日！」
 
+
+## 以下、続々参戦予定！
+
 # 開発資料
 
  - [pixi.js tutorial](https://github.com/kittykatattack/learningPixi)
