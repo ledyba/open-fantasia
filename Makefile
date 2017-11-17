@@ -1,7 +1,7 @@
 .PHONY: web test
 
 web:
-	npm run server
+	npm run start
 
 test:
 	npm run test
