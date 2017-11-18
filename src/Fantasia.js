@@ -59,12 +59,12 @@ export default class Fantasia {
 
   run() {
     window.requestAnimationFrame(this.runner_);
-    this.scene_.draw(this.renderer);
     const now = new Date().getTime();
     if(Number.isNaN(this.lastMove_)) {
       this.lastMove_ = now;
     }
     this.scene_.move(now - this.sceneStarted_, now - this.lastMove_);
     this.lastMove_ = now;
+    this.scene_.draw(this.renderer);
   }
 }
