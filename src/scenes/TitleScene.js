@@ -9,10 +9,12 @@ export default class TitleScene extends Scene {
    */
   constructor(fantasia) {
     super(fantasia);
-    const text = new PIXI.Text("zoi", {fill: '0xffffffff'});
+    const text = new PIXI.Text("オープンファンタジア", {fill: '0xffffffff'});
     this.stage.addChild(text);
-    text.x = 30;
+    text.anchor.x = 0.5;
+    text.x = fantasia.renderer.width/2;
     text.y = 90;
+
   }
 
   /**

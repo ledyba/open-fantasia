@@ -17,13 +17,13 @@
 
 しかし、ある日タイジュさまは未知の魔物に破壊され、里は燃え尽きてしまう。
 
-行くあてもなく里から飛び出した４人は、魔物を追いかける旅へ出る。ポストアポカリプスｘ魔法少女の新連載！
+行くあてもなく里から飛び出した４人は、魔物を追いかける旅へ出る。ポストアポカリプス×魔法少女の新連載！
 
 ## 以下、続々参戦予定！
 
 ### [なまごみ！](https://twitter.com/tikal/status/927756412175790080)
 
-可愛くデフォルメされたカラスがゴミ捨て場で人間のゴミを漁りながらダベるだけ
+可愛くデフォルメされたカラスがゴミ捨て場で人間のゴミを漁りながらダベるだけ！都市の中の野生
 
 ### [サーバールームの温もりは人のそれより暖かい](https://twitter.com/tikal/status/890467044335927297)
 
@@ -72,3 +72,9 @@
 # 開発資料
 
  - [pixi.js tutorial](https://github.com/kittykatattack/learningPixi)
+ - [pixi.js documentation](http://pixijs.download/dev/docs/index.html)
+
+# ライセンス
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a>の下に提供されています。
+

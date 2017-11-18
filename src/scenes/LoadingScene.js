@@ -13,7 +13,7 @@ export default class LoadingScene extends Scene{
     super(fantasia);
     this.nextScene_ = nextScene;
 
-    const text = new PIXI.Text("Now Loading   : 0%", {fill: '0xffffffff'});
+    const text = new PIXI.Text("", {fill: '0xffffffff'});
     this.loadingText = text;
     this.stage.addChild(text);
     text.anchor.x = 1;
@@ -45,13 +45,13 @@ export default class LoadingScene extends Scene{
     let text = "";
     switch(Math.floor(this.time_ / 500) % 3) {
       case 0:
-        text = "Now Loading.  : ";
+        text = "Now Loading.   ";
         break;
       case 1:
-        text = "Now Loading.. : ";
+        text = "Now Loading..  ";
         break;
       case 2:
-        text = "Now Loading...: ";
+        text = "Now Loading... ";
         break;
     }
     let percent = "    "+(Math.floor(loader.progress) | 0);
@@ -91,6 +91,7 @@ export default class LoadingScene extends Scene{
    * @param {PIXI.loaders.Resource} resource
    */
   onComplete(loader, resources) {
+    console.log("Loaded.");
     // 次のシーンへ
     this.fantasia.enterScene(this.nextScene_);
   }
