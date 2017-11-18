@@ -6,7 +6,7 @@ import LoadingScene from './scenes/LoadingScene';
 function main() {
   let fantasia = new Fantasia();
   fantasia.enterScene(new LoadingScene(fantasia, new TitleScene(fantasia)));
-  fantasia.start(document.body);
+  fantasia.start(document.getElementById("game"));
   window.requestAnimationFrame(() => {
     fantasia.run();
   });

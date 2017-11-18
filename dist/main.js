@@ -21293,7 +21293,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function main() {
   var fantasia = new _Fantasia2.default();
   fantasia.enterScene(new _LoadingScene2.default(fantasia, new _TitleScene2.default(fantasia)));
-  fantasia.start(document.body);
+  fantasia.start(document.getElementById("game"));
   window.requestAnimationFrame(function () {
     fantasia.run();
   });
