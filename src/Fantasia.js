@@ -7,7 +7,7 @@ export default class Fantasia {
      * @type {PIXI.WebGLRenderer}
      * @public
      */
-    this.renderer = PIXI.autoDetectRenderer(800, 600);
+    this.renderer = PIXI.autoDetectRenderer(1024, 576);
 
     /**
      * @type {HTMLElement}
