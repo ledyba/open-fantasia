@@ -5,6 +5,10 @@ import Scene from '../Scene.js';
 import LoadingScene from './LoadingScene.js';
 import MenuScene from './MenuScene.js';
 
+const BG_URL = 'resources/bg/DSC03634.JPG';
+const BGM_URL = 'resources/music/TheAutumnsOurs.mp3';
+const SE_URL = 'resources/se/button_long01.mp3';
+
 export default class TitleScene extends Scene {
   /**
    * 
@@ -16,9 +20,16 @@ export default class TitleScene extends Scene {
     const renderer = fantasia.renderer;
 
     // TODO: 全部絵にするか、もう少し飾りをつける。
-    
+
     // タイトル
-    this.title_ = new PIXI.Text("オープンファンタジア", {fill: '0xffffffff', fontSize: 48});
+    this.title_ = new PIXI.Text("オープンファンタジア", {
+      fill: '0xffffffff',
+      fontSize: 48,
+      dropShadow: true,
+      dropShadowBlur: 10,
+      dropShadowDistance: 0,
+      dropShadowColor: '0x000000'
+    });
     this.stage.addChild(this.title_);
     this.title_.anchor.x = 0.5;
 
@@ -35,10 +46,15 @@ export default class TitleScene extends Scene {
     this.clickTarget_.on("tap", this.onTap.bind(this));
     this.clickTarget_.on("click", this.onTap.bind(this));
     this.stage.addChild(this.clickTarget_);
+
+    // 背景
+    /** @type {PIXI.Sprite} */
+    this.bg_ = null;
+    this.loader.add(BG_URL);
     
     // BGMのセットアップ
-    const bgm = 'resources/music/TheAutumnsOurs.mp3';
-    const buttonSe = 'resources/se/button_long01.mp3';
+    const bgm = BGM_URL;
+    const buttonSe = SE_URL;
     this.loader.add(bgm);
     this.loader.add(buttonSe);
     
@@ -80,6 +96,14 @@ export default class TitleScene extends Scene {
   onStart(){
     super.onStart();
     this.sound_.play();
+    const fantasia = this.fantasia;
+    const renderer = fantasia.renderer;
+    
+    this.bg_ = new PIXI.Sprite(this.loader.resources[BG_URL].texture);
+    this.bg_.width = renderer.width;
+    this.bg_.height = renderer.height;
+    this.stage.addChildAt(this.bg_, 0);
+    
   }
   onEnd(){
     super.onEnd();

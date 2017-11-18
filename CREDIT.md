@@ -10,3 +10,7 @@
    - resources/music/TheAutumnsOurs 
    - resources/se/button_long01
    - resources/se/button_short01
+
+## 背景
+ - by [PSI](https://twitter.com/tikal)
+   - resources/bg/DSC03634.JPG
