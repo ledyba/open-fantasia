@@ -1,5 +1,8 @@
 import * as PIXI from 'pixi.js';
 
+/**
+ * 使い回しそうなUI部品の抽象化、これでいいのかかなり自信がない
+ */
 export default class Component {
   /**
    * 

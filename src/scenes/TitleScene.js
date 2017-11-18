@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
+import {Howl} from 'howler';
 
 export default class TitleScene extends Scene {
   /**
@@ -14,8 +15,10 @@ export default class TitleScene extends Scene {
     text.anchor.x = 0.5;
     text.x = fantasia.renderer.width/2;
     text.y = 90;
-
     this.loader.add("resources/music/TheAutumnsOurs.mp3");
+    this.sound_ = new Howl({
+      src: ['resources/music/TheAutumnsOurs.mp3']
+    });
   }
 
   /**
@@ -23,5 +26,10 @@ export default class TitleScene extends Scene {
    * @param {number} delta 
    */
   move(delta) {
+  }
+
+  onStart(){
+    super.onStart();
+    this.sound_.play();
   }
 }

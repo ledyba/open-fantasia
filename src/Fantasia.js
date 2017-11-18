@@ -35,7 +35,6 @@ export default class Fantasia {
   start(parent) {
     this.parent_ = parent;
     this.parent_.appendChild(this.renderer.view);
-    this.stage = new PIXI.Container();
   }
 
   /**
@@ -43,7 +42,13 @@ export default class Fantasia {
    * @param {Scene} scene 
    */
   enterScene(scene) {
+    if(this.scene_) {
+      this.scene_.onEnd();
+    }
     this.scene_ = scene;
+    if(this.scene_) {
+      this.scene_.onStart();
+    }
   }
 
   run() {

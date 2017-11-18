@@ -28,7 +28,18 @@ export default class LoadingScene extends Scene{
     loader.onLoad.add(this.onLoad.bind(this));
     // called once when the queued resources all load.
     loader.load(this.onComplete.bind(this));
+
+    /**
+     * @type {number}
+     * @private
+     */
     this.time_ = 0;
+
+    /**
+     * @type {string}
+     * @private
+     */
+    this.error_ = null;
   }
 
   /**
@@ -37,6 +48,10 @@ export default class LoadingScene extends Scene{
   move(delta) {
     this.time_ += delta;
     const loader = this.nextScene_.loader;
+
+    if(this.error_ !== null) {
+      this.loadingText.style.fill = "red";
+    }
     
     let text = "";
     switch(Math.floor(this.time_ / 500) % 3) {
@@ -64,6 +79,7 @@ export default class LoadingScene extends Scene{
    */
   onError(err, loader, resource) {
     console.error(err);
+    this.error_ = err.message;
   }
   /**
    * @param {Error} err
@@ -71,7 +87,7 @@ export default class LoadingScene extends Scene{
    * @param {PIXI.loaders.Resource} resource
    */
   onLoad(loader, resource) {
-    console.log(resource.name, 'loaded:', resource.progressChunk, '%');
+    console.log('['+resource.progressChunk.toFixed(2)+'%] ', resource.name);
   }
 
   /**
@@ -81,6 +97,8 @@ export default class LoadingScene extends Scene{
   onComplete(loader, resources) {
     console.log("Loaded.");
     // 次のシーンへ
-    this.fantasia.enterScene(this.nextScene_);
+    if(this.error_ === null){
+      this.fantasia.enterScene(this.nextScene_);
+    }
   }
 };

@@ -33,6 +33,19 @@ export default class Scene {
   move(delta) {
     throw new Error("Please implement move");
   }
+
+  /**
+   * シーンが開始する時に呼ばれる
+   */
+  onStart() {
+  }
+
+  /**
+   * シーンが終わる時に呼ばれる
+   */
+  onEnd() {
+    this.loader.destroy();
+  }
   /**
    * 
    * @param {PIXI.WebGLRenderer} renderer 
