@@ -1,6 +1,14 @@
 # ファンタジア
 実在する架空のソーシャルゲーム
 
+# デモサイト
+
+[dokidokivisual.org](http://dokidokivisual.org/)
+
+# 開発に参加したい
+
+open-dokidokivisualのメンバーにするので [@tikal](https://twitter.com/tikal) に話しかけてください
+
 # 登場予定作品
 
 ## [甘くて白い綿の花](https://twitter.com/tikal/status/867053860019253248)
