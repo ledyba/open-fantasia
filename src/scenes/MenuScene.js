@@ -42,11 +42,12 @@ export default class MenuScene extends Scene {
     this.character_.anchor.x = 0.5;
     this.character_.anchor.y = 0.5;
     this.character_.y = renderer.height/2;
-    this.character_.x = renderer.width/4;
+    this.character_.x = renderer.width/3;
     this.stage.addChild(this.character_);
 
     // ソシャゲと言えば、ガチャ。
     // TODO: 絵でボタンを書き直す
+    /** @type {PIXI.Sprite} */
     this.gatchaButton_ = (() => {
       const g = new PIXI.Graphics();
       g.beginFill(0xffffff, 1);

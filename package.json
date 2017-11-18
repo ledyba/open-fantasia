@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "build": "webpack",
     "test": "NODE_ENV=test mocha --require babel-register --recursive $(find . -type f -name '*.spec.js' -not -path './node_modules/*')"
   },
   "keywords": [
