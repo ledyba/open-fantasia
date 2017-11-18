@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
+import 'pixi-sound';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
-import {Howl} from 'howler';
 
 export default class TitleScene extends Scene {
   /**
@@ -19,10 +19,8 @@ export default class TitleScene extends Scene {
     // BGMのセットアップ
     const bgm = 'resources/music/TheAutumnsOurs.mp3';
     this.loader.add(bgm);
-    this.sound_ = new Howl({
-      src: [bgm]
-    });
-    this.sound_.load();
+    
+    this.sound_ = PIXI.sound.Sound.from(bgm);
   }
 
   /**
@@ -43,6 +41,5 @@ export default class TitleScene extends Scene {
   onEnd(){
     super.onEnd();
     this.sound_.stop();
-    this.sound_.unload();
   }
 }
