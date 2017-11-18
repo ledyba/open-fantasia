@@ -42061,9 +42061,14 @@ var TitleScene = function (_Scene) {
 
     // BGMのセットアップ
     var bgm = 'resources/music/TheAutumnsOurs.mp3';
+    var buttonSe = 'resources/se/button_long01.mp3';
     _this.loader.add(bgm);
+    _this.loader.add(buttonSe);
 
     _this.sound_ = PIXI.sound.Sound.from(bgm);
+    _this.buttonSe_ = PIXI.sound.Sound.from(buttonSe);
+
+    _this.buttonFreq_ = 400;
     return _this;
   }
 
@@ -42086,14 +42091,17 @@ var TitleScene = function (_Scene) {
       // 開始メッセージを点滅させる
       this.press_.x = renderer.width / 2;
       this.press_.y = renderer.height * 3 / 4;
-      this.press_.alpha = Math.abs(Math.sin(elapsed / 400));
+      this.press_.alpha = Math.abs(Math.sin(elapsed / this.buttonFreq_));
     }
   }, {
     key: 'onTap',
     value: function onTap() {
       // メニューシーンへ移動
       var fantasia = this.fantasia;
-      fantasia.enterScene(new _LoadingScene2.default(fantasia, new _MenuScene2.default(fantasia)));
+      this.buttonFreq_ = 200;
+      this.buttonSe_.play("", function () {
+        fantasia.enterScene(new _LoadingScene2.default(fantasia, new _MenuScene2.default(fantasia)));
+      });
     }
   }, {
     key: 'onStart',
