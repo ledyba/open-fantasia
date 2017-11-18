@@ -2,8 +2,11 @@
 
 ## ソースコード
 
-git blameしてください
+ - [Contributors to open-dokidokivisual/fantasia(https://github.com/open-dokidokivisual/fantasia/graphs/contributors)
 
 ## 音楽
 
- - resources/music/TheAutumnsOurs by [Gustav](https://twitter.com/gustav_gg1)
+ - by [Gustav](https://twitter.com/gustav_gg1)
+   - resources/music/TheAutumnsOurs 
+   - resources/se/button_long01
+   - resources/se/button_short01
