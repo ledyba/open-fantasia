@@ -74,6 +74,16 @@
  - [pixi.js tutorial](https://github.com/kittykatattack/learningPixi)
  - [pixi.js documentation](http://pixijs.download/dev/docs/index.html)
 
+# 実行するには？
+
+```bash
+git clone git@github.com:open-dokidokivisual/fantasia.git
+cd fantasia
+npm install # 依存ライブラリをインストールする
+npm start # 開発用サーバを起動
+open http://localhost:8080/ # ブラウザで開く
+```
+
 # ライセンス
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />この 作品 は <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">クリエイティブ・コモンズ 表示 - 継承 4.0 国際 ライセンス</a>の下に提供されています。
