@@ -15,6 +15,7 @@ export default class TitleScene extends Scene {
     text.x = fantasia.renderer.width/2;
     text.y = 90;
 
+    this.loader.add("resources/music/TheAutumnsOurs.mp3");
   }
 
   /**
@@ -22,8 +23,5 @@ export default class TitleScene extends Scene {
    * @param {number} delta 
    */
   move(delta) {
-    /** @type {PIXI.Text} */
-    const text = this.stage.getChildAt(0);
-    text.text = delta.toString();
   }
 }

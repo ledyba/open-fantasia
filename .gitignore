@@ -1,5 +1,7 @@
 # added by me
 dist-web/
+.DS_Store
+._.DS_Store
 
 # Logs
 logs

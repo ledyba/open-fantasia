@@ -22,16 +22,12 @@ export default class LoadingScene extends Scene{
     text.y = fantasia.renderer.height - 10;
     //
     const loader = nextScene.loader;
-    // called once per loaded/errored file
-    loader.onProgress.add(this.onProgress.bind(this));
     // called once per errored file
     loader.onError.add(this.onError.bind(this));
     // called once per loaded file
     loader.onLoad.add(this.onLoad.bind(this));
     // called once when the queued resources all load.
-    loader.onComplete.add(this.onComplete.bind(this));
-    loader.load();
-
+    loader.load(this.onComplete.bind(this));
     this.time_ = 0;
   }
 
@@ -62,13 +58,6 @@ export default class LoadingScene extends Scene{
   }
 
   /**
-   * 
-   * @param {PIXI.loaders.Loader} loader 
-   * @param {*} resources 
-   */
-  onProgress(loader, resources) {
-  }
-  /**
    * @param {Error} err
    * @param {PIXI.loaders.Loader} loader 
    * @param {*} resources 
@@ -86,7 +75,6 @@ export default class LoadingScene extends Scene{
   }
 
   /**
-   * @param {Error} err
    * @param {PIXI.loaders.Loader} loader 
    * @param {PIXI.loaders.Resource} resource
    */
