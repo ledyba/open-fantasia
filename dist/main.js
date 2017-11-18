@@ -42024,6 +42024,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var BG_URL = 'resources/bg/DSC03634.JPG';
+var BGM_URL = 'resources/music/TheAutumnsOurs.mp3';
+var SE_URL = 'resources/se/button_long01.mp3';
+
 var TitleScene = function (_Scene) {
   _inherits(TitleScene, _Scene);
 
@@ -42041,7 +42045,14 @@ var TitleScene = function (_Scene) {
     // TODO: 全部絵にするか、もう少し飾りをつける。
 
     // タイトル
-    _this.title_ = new PIXI.Text("オープンファンタジア", { fill: '0xffffffff', fontSize: 48 });
+    _this.title_ = new PIXI.Text("オープンファンタジア", {
+      fill: '0xffffffff',
+      fontSize: 48,
+      dropShadow: true,
+      dropShadowBlur: 10,
+      dropShadowDistance: 0,
+      dropShadowColor: '0x000000'
+    });
     _this.stage.addChild(_this.title_);
     _this.title_.anchor.x = 0.5;
 
@@ -42059,9 +42070,14 @@ var TitleScene = function (_Scene) {
     _this.clickTarget_.on("click", _this.onTap.bind(_this));
     _this.stage.addChild(_this.clickTarget_);
 
+    // 背景
+    /** @type {PIXI.Sprite} */
+    _this.bg_ = null;
+    _this.loader.add(BG_URL);
+
     // BGMのセットアップ
-    var bgm = 'resources/music/TheAutumnsOurs.mp3';
-    var buttonSe = 'resources/se/button_long01.mp3';
+    var bgm = BGM_URL;
+    var buttonSe = SE_URL;
     _this.loader.add(bgm);
     _this.loader.add(buttonSe);
 
@@ -42110,6 +42126,13 @@ var TitleScene = function (_Scene) {
     value: function onStart() {
       _get(TitleScene.prototype.__proto__ || Object.getPrototypeOf(TitleScene.prototype), 'onStart', this).call(this);
       this.sound_.play();
+      var fantasia = this.fantasia;
+      var renderer = fantasia.renderer;
+
+      this.bg_ = new PIXI.Sprite(this.loader.resources[BG_URL].texture);
+      this.bg_.width = renderer.width;
+      this.bg_.height = renderer.height;
+      this.stage.addChildAt(this.bg_, 0);
     }
   }, {
     key: 'onEnd',
