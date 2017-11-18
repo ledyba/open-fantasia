@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
 
-export default class TopScene extends Scene {
+export default class TitleScene extends Scene {
   /**
    * 
    * @param {Fantasia} fantasia 

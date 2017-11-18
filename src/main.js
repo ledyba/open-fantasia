@@ -1,10 +1,11 @@
 import Fantasia from './Fantasia.js';
 import Scene from './Scene.js';
-import TopScene from './scenes/TopScene.js';
+import TitleScene from './scenes/TitleScene.js';
+import LoadingScene from './scenes/LoadingScene';
 
 function main() {
   let fantasia = new Fantasia();
-  fantasia.enterScene(new TopScene(fantasia));
+  fantasia.enterScene(new LoadingScene(fantasia, new TitleScene(fantasia)));
   fantasia.start(document.body);
   window.requestAnimationFrame(() => {
     fantasia.run();
