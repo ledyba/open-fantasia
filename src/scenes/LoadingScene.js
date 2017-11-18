@@ -30,12 +30,6 @@ export default class LoadingScene extends Scene{
     loader.load(this.onComplete.bind(this));
 
     /**
-     * @type {number}
-     * @private
-     */
-    this.time_ = 0;
-
-    /**
      * @type {string}
      * @private
      */
@@ -43,10 +37,10 @@ export default class LoadingScene extends Scene{
   }
 
   /**
+   * @param {number} elapsed 
    * @param {number} delta 
    */
-  move(delta) {
-    this.time_ += delta;
+  move(elapsed, delta) {
     const loader = this.nextScene_.loader;
 
     if(this.error_ !== null) {
@@ -54,7 +48,7 @@ export default class LoadingScene extends Scene{
     }
     
     let text = "";
-    switch(Math.floor(this.time_ / 500) % 3) {
+    switch(Math.floor(elapsed / 500) % 3) {
       case 0:
         text = "Now Loading.   ";
         break;

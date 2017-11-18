@@ -26,7 +26,12 @@ export default class Fantasia {
      * @private
      */
     this.lastMove_ = NaN;
-
+    /**
+     * @type {number}
+     * @private
+     */
+    this.sceneStarted_ = NaN;
+    
     this.runner_ = this.run.bind(this);
   }
   /**
@@ -46,6 +51,7 @@ export default class Fantasia {
       this.scene_.onEnd();
     }
     this.scene_ = scene;
+    this.sceneStarted_ = new Date().getTime();
     if(this.scene_) {
       this.scene_.onStart();
     }
@@ -58,8 +64,7 @@ export default class Fantasia {
     if(Number.isNaN(this.lastMove_)) {
       this.lastMove_ = now;
     }
-    const delta = now - this.lastMove_;
-    this.scene_.move(delta);
+    this.scene_.move(now - this.sceneStarted_, now - this.lastMove_);
     this.lastMove_ = now;
   }
 }

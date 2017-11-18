@@ -27,10 +27,10 @@ export default class Scene {
   }
 
   /**
-   * 
+   * @param {number} elapsed
    * @param {number} delta 
    */
-  move(delta) {
+  move(elapsed, delta) {
     throw new Error("Please implement move");
   }
 
