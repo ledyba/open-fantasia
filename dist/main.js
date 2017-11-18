@@ -42098,7 +42098,9 @@ var TitleScene = function (_Scene) {
     value: function onTap() {
       // メニューシーンへ移動
       var fantasia = this.fantasia;
-      this.buttonFreq_ = 200;
+      this.buttonFreq_ = 150;
+      this.sound_.volume = 0.7;
+      this.buttonSe_.volume = 2;
       this.buttonSe_.play("", function () {
         fantasia.enterScene(new _LoadingScene2.default(fantasia, new _MenuScene2.default(fantasia)));
       });
