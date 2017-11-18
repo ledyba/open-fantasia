@@ -2,6 +2,8 @@ import * as PIXI from 'pixi.js';
 import 'pixi-sound';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
+import LoadingScene from './LoadingScene.js';
+import MenuScene from './MenuScene.js';
 
 export default class TitleScene extends Scene {
   /**
@@ -61,7 +63,8 @@ export default class TitleScene extends Scene {
 
   onTap() {
     // メニューシーンへ移動
-    console.log("TODO");
+    const fantasia = this.fantasia;
+    fantasia.enterScene(new LoadingScene(fantasia, new MenuScene(fantasia)));
   }
 
   onStart(){
