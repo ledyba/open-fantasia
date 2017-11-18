@@ -42112,6 +42112,9 @@ var TitleScene = function (_Scene) {
   }, {
     key: 'onTap',
     value: function onTap() {
+      if (this.buttonSe_.isPlaying) {
+        return;
+      }
       // メニューシーンへ移動
       var fantasia = this.fantasia;
       this.buttonFreq_ = 150;

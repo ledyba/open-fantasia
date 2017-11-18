@@ -83,6 +83,9 @@ export default class TitleScene extends Scene {
   }
 
   onTap() {
+    if(this.buttonSe_.isPlaying) {
+      return;
+    }
     // メニューシーンへ移動
     const fantasia = this.fantasia;
     this.buttonFreq_ = 150;
