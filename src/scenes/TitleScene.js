@@ -10,14 +10,19 @@ export default class TitleScene extends Scene {
    */
   constructor(fantasia) {
     super(fantasia);
+
+    // タイトル
     const text = new PIXI.Text("オープンファンタジア", {fill: '0xffffffff'});
     this.stage.addChild(text);
     text.anchor.x = 0.5;
     text.x = fantasia.renderer.width/2;
     text.y = 90;
-    this.loader.add("resources/music/TheAutumnsOurs.mp3");
+
+    // BGMのセットアップ
+    const bgm = 'resources/music/TheAutumnsOurs.mp3';
+    this.loader.add(bgm);
     this.sound_ = new Howl({
-      src: ['resources/music/TheAutumnsOurs.mp3']
+      src: [bgm]
     });
   }
 
@@ -31,5 +36,9 @@ export default class TitleScene extends Scene {
   onStart(){
     super.onStart();
     this.sound_.play();
+  }
+  onEnd(){
+    super.onEnd();
+    this.sound_.stop();
   }
 }
