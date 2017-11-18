@@ -1,13 +1,22 @@
 # ファンタジア
 実在する架空のソーシャルゲーム
 
-# デモサイト
+## 冒険する！
 
 [dokidokivisual.org](http://dokidokivisual.org/)
 
 # 開発に参加したい
 
 open-dokidokivisualのメンバーにするので [@tikal](https://twitter.com/tikal) に話しかけてください。（もちろんグループに参加しなくてもpull reqを送るとかでも可）
+
+# 壮大なバックグラウンドストーリー
+
+Post-Gochiusanityを克服し、シンギュラリティの到来した2020年。Deep Kirara、Artificial Kirara
+、Kirara Reality…次から次へと生み出される様々なテクノロジーによって「 **きらら** 」は進歩を遂げ、進歩は進歩を生み、指数関数的に「 **きらら** 」は飽和していく。特異点《シンギュラリティ》の先の更なる特異点《シンギュラリティ》の結果として、人類は「 **きららパイプライン** 」を維持するための部品と成り下がる。「 **きららという飼育小屋** 」に閉じ込められた人類は、そこからの逃避をめざす。そう、「 **きららジャンプ** 」である。「 **きらら** 」から逃れるにも、「 **きらら** 」に頼らざるを得ない人類。人類は、自分たちの生み出したダークウェブから「 **きらら** 」キャラを実体化し、ポンチ絵による理論武装で自らの生み出した「 **きらら** 」へ立ち向かっていく。
+
+## よくわかんない。ポンチ１枚で。
+
+[![](./image.png)](https://docs.google.com/presentation/d/124Xwcyl0AbXDc6xXPQX2OJ0flfriOLStmVDNAGUJgFE/edit#slide=id.g22c6eadebd_1312_30)
 
 # 登場予定作品
 
@@ -79,10 +88,12 @@ open-dokidokivisualのメンバーにするので [@tikal](https://twitter.com/t
 
 # 開発資料
 
+## ドキュメント
+
  - [pixi.js tutorial](https://github.com/kittykatattack/learningPixi)
  - [pixi.js documentation](http://pixijs.download/dev/docs/index.html)
 
-# 実行するには？
+## 実行するには？
 
 ```bash
 git clone git@github.com:open-dokidokivisual/fantasia.git
