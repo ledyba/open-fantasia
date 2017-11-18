@@ -15,7 +15,7 @@ open-dokidokivisualのメンバーにするので [@tikal](https://twitter.com/t
 
 あなたの毎日が、「**きらら**」でいっぱいに！
 
-## よくわかんない。ポンチ１枚で。
+## よくわかんない。ポンチ絵１枚で。
 
 [![](./image.png)](https://docs.google.com/presentation/d/124Xwcyl0AbXDc6xXPQX2OJ0flfriOLStmVDNAGUJgFE/edit#slide=id.g22c6eadebd_1312_30)
 
