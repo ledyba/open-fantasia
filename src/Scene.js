@@ -27,7 +27,7 @@ export default class Scene {
   }
 
   /**
-   * @param {number} elapsed
+   * @param {number} elapsed 
    * @param {number} delta 
    */
   move(elapsed, delta) {
