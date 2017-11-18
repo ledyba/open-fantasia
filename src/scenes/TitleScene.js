@@ -24,6 +24,7 @@ export default class TitleScene extends Scene {
     this.sound_ = new Howl({
       src: [bgm]
     });
+    this.sound_.load();
   }
 
   /**
@@ -40,5 +41,6 @@ export default class TitleScene extends Scene {
   onEnd(){
     super.onEnd();
     this.sound_.stop();
+    this.sound_.unload();
   }
 }
