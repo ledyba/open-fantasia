@@ -38,9 +38,14 @@ export default class TitleScene extends Scene {
     
     // BGMのセットアップ
     const bgm = 'resources/music/TheAutumnsOurs.mp3';
+    const buttonSe = 'resources/se/button_long01.mp3';
     this.loader.add(bgm);
+    this.loader.add(buttonSe);
     
     this.sound_ = PIXI.sound.Sound.from(bgm);
+    this.buttonSe_ = PIXI.sound.Sound.from(buttonSe);
+
+    this.buttonFreq_ = 400;
   }
 
   /**
@@ -58,13 +63,16 @@ export default class TitleScene extends Scene {
     // 開始メッセージを点滅させる
     this.press_.x = renderer.width/2;
     this.press_.y = renderer.height*3/4;
-    this.press_.alpha = Math.abs(Math.sin(elapsed / 400));
+    this.press_.alpha = Math.abs(Math.sin(elapsed / this.buttonFreq_));
   }
 
   onTap() {
     // メニューシーンへ移動
     const fantasia = this.fantasia;
-    fantasia.enterScene(new LoadingScene(fantasia, new MenuScene(fantasia)));
+    this.buttonFreq_ = 200;
+    this.buttonSe_.play("", () => {
+      fantasia.enterScene(new LoadingScene(fantasia, new MenuScene(fantasia)));
+    });
   }
 
   onStart(){
