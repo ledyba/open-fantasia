@@ -7,12 +7,22 @@ export default class Scene {
    * @param {Fantasia} fantasia 
    */
   constructor(fantasia) {
-    this.fantasia_ = fantasia;
+    /**
+     * @type {Fantasia}
+     * @protected
+     */
+    this.fantasia = fantasia;
 
-    /** @type {PIXI.Container} */
+    /**
+     * @type {PIXI.Container}
+     * @protected
+     */
     this.stage = new PIXI.Container();
 
-    /** @type {PIXI.loaders.Loader} */
+    /**
+     * @type {PIXI.loaders.Loader}
+     * @protected
+     */
     this.loader = new PIXI.loaders.Loader();
   }
 

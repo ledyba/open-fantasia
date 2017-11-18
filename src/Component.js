@@ -7,7 +7,15 @@ export default class Component {
    * @param {PIXI.DisplayObject} container
    */
   constructor(parent, container) {
+    /**
+     * @type {PIXI.Container} 
+     * @protected
+     */
     this.parent = parent;
+    /**
+     * @type {PIXI.Container}
+     * @protected
+     */
     this.container = container || new PIXI.Container();
   }
 

@@ -22,33 +22,28 @@ export default class LoadingScene extends Scene{
     text.y = fantasia.renderer.height - 10;
     //
     const loader = nextScene.loader;
-
     // called once per loaded/errored file
     loader.onProgress.add(this.onProgress.bind(this));
-
     // called once per errored file
     loader.onError.add(this.onError.bind(this));
-
     // called once per loaded file
     loader.onLoad.add(this.onLoad.bind(this));
-
     // called once when the queued resources all load.
     loader.onComplete.add(this.onComplete.bind(this));
-
     loader.load();
 
-    this.time = 0;
+    this.time_ = 0;
   }
 
   /**
    * @param {number} delta 
    */
   move(delta) {
-    this.time += delta;
+    this.time_ += delta;
     const loader = this.nextScene_.loader;
     
     let text = "";
-    switch(Math.floor(this.time / 500) % 3) {
+    switch(Math.floor(this.time_ / 500) % 3) {
       case 0:
         text = "Now Loading.  : ";
         break;
@@ -97,6 +92,6 @@ export default class LoadingScene extends Scene{
    */
   onComplete(loader, resources) {
     // 次のシーンへ
-
+    this.fantasia.enterScene(this.nextScene_);
   }
 };

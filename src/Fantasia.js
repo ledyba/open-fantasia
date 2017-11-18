@@ -3,16 +3,28 @@ import Scene from './Scene.js';
 
 export default class Fantasia {
   constructor() {
-    /** @type {PIXI.WebGLRenderer} */
+    /**
+     * @type {PIXI.WebGLRenderer}
+     * @public
+     */
     this.renderer = PIXI.autoDetectRenderer(800, 600);
 
-    /** @type {HTMLElement} */
-    this.parent = null;
+    /**
+     * @type {HTMLElement}
+     * @private
+     */
+    this.parent_ = null;
 
-    /** @type {Scene} */
-    this.scene = null;
+    /**
+     * @type {Scene}
+     * @private
+     */
+    this.scene_ = null;
 
-    /** @type {number} */
+    /**
+     * @type {number}
+     * @private
+     */
     this.lastMove_ = NaN;
 
     this.runner_ = this.run.bind(this);
@@ -21,8 +33,8 @@ export default class Fantasia {
    * @param {HTMLElement} parent 
    */
   start(parent) {
-    this.parent = parent;
-    this.parent.appendChild(this.renderer.view);
+    this.parent_ = parent;
+    this.parent_.appendChild(this.renderer.view);
     this.stage = new PIXI.Container();
   }
 
@@ -31,18 +43,18 @@ export default class Fantasia {
    * @param {Scene} scene 
    */
   enterScene(scene) {
-    this.scene = scene;
+    this.scene_ = scene;
   }
 
   run() {
     window.requestAnimationFrame(this.runner_);
-    this.scene.draw(this.renderer);
+    this.scene_.draw(this.renderer);
     const now = new Date().getTime();
     if(Number.isNaN(this.lastMove_)) {
       this.lastMove_ = now;
     }
     const delta = now - this.lastMove_;
-    this.scene.move(delta);
+    this.scene_.move(delta);
     this.lastMove_ = now;
   }
 }
