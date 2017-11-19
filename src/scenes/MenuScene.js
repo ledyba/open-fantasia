@@ -19,8 +19,8 @@ export default class MenuScene extends Scene {
     this.title_ = new PIXI.Text("オープンファンタジア", {fill: '0xffffffff'});
     this.stage.addChild(this.title_);
     this.title_.anchor.x = 0;
-    this.title_.x = 0;
-    this.title_.y = 0;
+    this.title_.x = 10;
+    this.title_.y = 10;
 
     // ソシャゲのメニュー画面と言えばキャラの立ち絵
     /** @type {PIXI.Sprite} */
