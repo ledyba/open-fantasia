@@ -43,6 +43,17 @@ export default class MenuScene extends Scene {
     this.character_.anchor.y = 0.5;
     this.character_.y = renderer.height/2;
     this.character_.x = renderer.width/3;
+    this.character_.interactive = true;
+    let characterTapCnt = 0;
+    this.characterTapCnt_ = 0;
+    let characterTapFn = () => {
+      if(this.characterTapCnt_ > 0) {
+        return;
+      }
+      this.characterTapCnt_ = 300;
+    };
+    this.character_.on('tap', characterTapFn);
+    this.character_.on('click', characterTapFn);
     this.stage.addChild(this.character_);
 
     // ソシャゲと言えば、ガチャ。
@@ -75,6 +86,12 @@ export default class MenuScene extends Scene {
    */
   move(elapsed, delta) {
     const renderer = this.fantasia.renderer;
+
+    // キャラを動かす
+    const charaCnt = 300 - this.characterTapCnt_;
+    this.character_.y = renderer.height/2 - 10 * Math.exp(-charaCnt/150) * Math.abs(Math.sin(charaCnt / 50));
+    this.character_.x = renderer.width/3;
+    this.characterTapCnt_ = Math.max(this.characterTapCnt_ - delta, 0);
   }
 
   onStart(){
