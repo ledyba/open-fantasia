@@ -3,6 +3,8 @@ import 'pixi-sound';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
 
+const TWITCHNG_URL = 'resources/se/character_twitching_01.wav'
+
 export default class MenuScene extends Scene {
   /**
    * 
@@ -46,7 +48,12 @@ export default class MenuScene extends Scene {
     this.character_.interactive = true;
     let characterTapCnt = 0;
     this.characterTapCnt_ = 0;
+    // キャラSE
+    const characterSe = TWITCHNG_URL;
+    this.loader.add(characterSe);
+    this.characterSe_ = PIXI.sound.Sound.from(characterSe);
     let characterTapFn = () => {
+      this.characterSe_.play();
       if(this.characterTapCnt_ > 0) {
         return;
       }
