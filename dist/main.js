@@ -49995,7 +49995,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TWITCHNG_URL = 'resources/se/character_twitching_01.wav';
+var TWITCHNG_URL = 'resources/se/character_twitching_01.mp3';
 
 var MenuScene = function (_Scene) {
   _inherits(MenuScene, _Scene);
@@ -50044,11 +50044,10 @@ var MenuScene = function (_Scene) {
     _this.character_.interactive = true;
     var characterTapCnt = 0;
     _this.characterTapCnt_ = 0;
-    // キャラSEのセットアッ
+    // キャラSE
     var characterSe = TWITCHNG_URL;
     _this.loader.add(characterSe);
     _this.characterSe_ = PIXI.sound.Sound.from(characterSe);
-
     var characterTapFn = function characterTapFn() {
       _this.characterSe_.play();
       if (_this.characterTapCnt_ > 0) {

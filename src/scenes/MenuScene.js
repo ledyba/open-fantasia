@@ -3,7 +3,7 @@ import 'pixi-sound';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
 
-const TWITCHNG_URL = 'resources/se/character_twitching_01.wav'
+const TWITCHNG_URL = 'resources/se/character_twitching_01.mp3'
 
 export default class MenuScene extends Scene {
   /**
