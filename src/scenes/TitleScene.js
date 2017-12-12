@@ -92,11 +92,11 @@ export default class TitleScene extends Scene {
     this.sound_.volume=0.7;
     this.buttonSe_.volume = 2;
     this.buttonSe_.play("", () => {
-      fantasia.enterScene(new LoadingScene(fantasia, new MenuScene(fantasia)));
+      fantasia.enterScene(new MenuScene(fantasia));
     });
   }
 
-  onStart(){
+  onStart() {
     super.onStart();
     this.sound_.play();
     const fantasia = this.fantasia;
@@ -108,7 +108,7 @@ export default class TitleScene extends Scene {
     this.stage.addChildAt(this.bg_, 0);
     
   }
-  onEnd(){
+  onEnd() {
     super.onEnd();
     this.sound_.stop();
   }

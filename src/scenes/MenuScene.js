@@ -13,9 +13,9 @@ export default class MenuScene extends Scene {
 
     const renderer = fantasia.renderer;
 
-    this.loader.add("index.html"); //なんか書かないとLoadingがCompleteしたことにならないバグがある
-
     // タイトル
+    // TODO: だいたい「何か」が左上にあるのは間違いないが、
+    // 「それっぽさ」的にはタイトルおいとけばいいのか？
     this.title_ = new PIXI.Text("オープンファンタジア", {fill: '0xffffffff'});
     this.stage.addChild(this.title_);
     this.title_.anchor.x = 0;
@@ -44,7 +44,6 @@ export default class MenuScene extends Scene {
     this.character_.y = renderer.height/2;
     this.character_.x = renderer.width/3;
     this.character_.interactive = true;
-    let characterTapCnt = 0;
     this.characterTapCnt_ = 0;
     let characterTapFn = () => {
       if(this.characterTapCnt_ > 0) {
@@ -73,11 +72,11 @@ export default class MenuScene extends Scene {
       renderer.render(g, rt);
       return new PIXI.Sprite(rt);
     })();
+    this.stage.addChild(this.gatchaButton_);
     this.gatchaButton_.anchor.x = 0.5;
     this.gatchaButton_.anchor.y = 0.5;
     this.gatchaButton_.y = renderer.height/2;
     this.gatchaButton_.x = renderer.width*3/4;
-    this.stage.addChild(this.gatchaButton_);
   }
 
   /**
@@ -94,10 +93,11 @@ export default class MenuScene extends Scene {
     this.characterTapCnt_ = Math.max(this.characterTapCnt_ - delta, 0);
   }
 
-  onStart(){
+  onStart() {
     super.onStart();
   }
-  onEnd(){
+
+  onEnd() {
     super.onEnd();
   }
 }

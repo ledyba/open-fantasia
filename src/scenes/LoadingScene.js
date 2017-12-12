@@ -21,7 +21,11 @@ export default class LoadingScene extends Scene{
     text.x = fantasia.renderer.width - 10;
     text.y = fantasia.renderer.height - 10;
     //
-    const loader = nextScene.loader;
+    const loader = nextScene.loader_;
+    if(!loader) {
+      throw new Error("We don't need to load anything.");
+    }
+
     // called once per errored file
     loader.onError.add(this.onError.bind(this));
     // called once per loaded file
@@ -93,6 +97,8 @@ export default class LoadingScene extends Scene{
     // 次のシーンへ
     if(this.error_ === null){
       this.fantasia.enterScene(this.nextScene_);
+    } else {
+      log.error("Error when loading: ", this.error_);
     }
   }
 };

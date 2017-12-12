@@ -21,11 +21,37 @@ export default class Scene {
 
     /**
      * @type {PIXI.loaders.Loader}
-     * @protected
+     * @private
      */
-    this.loader = new PIXI.loaders.Loader();
+    this.loader_ = null;
+    /**
+     * @type {boolean}
+     * @private
+     */
+    this.loaded_ = false;
   }
 
+  /**
+   * @type {PIXI.loaders.Loader}
+   * @protected
+   */
+  get loader() {
+    if(!this.loader_){
+      this.loader_ = new PIXI.loaders.Loader();
+      this.loader_.once('complete', () =>{
+        this.loaded_ = true;
+      });
+    }
+    return this.loader_;
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get loadingRequired() {
+    return !!this.loader_ && !this.loaded_;
+  }
+  
   /**
    * @param {number} elapsed 
    * @param {number} delta 
@@ -44,7 +70,9 @@ export default class Scene {
    * シーンが終わる時に呼ばれる
    */
   onEnd() {
-    this.loader.destroy();
+    if(this.loader_) {
+      this.loader_.destroy();
+    }
   }
   /**
    * 

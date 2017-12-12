@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import Scene from './Scene.js';
+import LoadingScene from './scenes/LoadingScene';
 
 export default class Fantasia {
   constructor() {
@@ -49,6 +50,9 @@ export default class Fantasia {
   enterScene(scene) {
     if(this.scene_) {
       this.scene_.onEnd();
+    }
+    if(scene.loadingRequired) {
+      scene = new LoadingScene(this, scene);
     }
     this.scene_ = scene;
     this.sceneStarted_ = new Date().getTime();
