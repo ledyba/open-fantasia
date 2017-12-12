@@ -18,7 +18,7 @@ export default class Dialog extends PIXI.Graphics {
     title.x = 400;
     title.y = 20;
     g.beginFill(0xffdddd, 1);
-    g.drawRoundedRect(20, 10, 760, title.height + 10, 10);
+    g.drawRoundedRect(20, 15, 760, title.height + 10, 10);
     g.addChild(title);
 
     const text = new PIXI.Text(

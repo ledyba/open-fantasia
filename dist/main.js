@@ -50234,7 +50234,7 @@ var Dialog = function (_PIXI$Graphics) {
     title.x = 400;
     title.y = 20;
     g.beginFill(0xffdddd, 1);
-    g.drawRoundedRect(20, 10, 760, title.height + 10, 10);
+    g.drawRoundedRect(20, 15, 760, title.height + 10, 10);
     g.addChild(title);
 
     var text = new PIXI.Text("ただいま、緊急メンテナンスを実施しております。\n\n" + "ご利用の皆さまにはご不便をおかけいたしておりますが、\n" + "何卒ご理解とプルリクエストを宜しくお願い申し上げます。\n" + "https://github.com/open-dokidokivisual/fantasia");
