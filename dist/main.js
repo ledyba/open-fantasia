@@ -286,7 +286,7 @@ Object.defineProperty(exports, 'TextureMatrix', {
   }
 });
 
-var _BaseTexture = __webpack_require__(10);
+var _BaseTexture = __webpack_require__(12);
 
 Object.defineProperty(exports, 'BaseTexture', {
   enumerable: true,
@@ -1887,7 +1887,7 @@ exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _BaseTexture = __webpack_require__(10);
+var _BaseTexture = __webpack_require__(12);
 
 var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 
@@ -2925,6 +2925,241 @@ module.exports = g;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _pixi = __webpack_require__(11);
+
+var PIXI = _interopRequireWildcard(_pixi);
+
+var _Scene = __webpack_require__(19);
+
+var _Scene2 = _interopRequireDefault(_Scene);
+
+var _LoadingScene = __webpack_require__(40);
+
+var _LoadingScene2 = _interopRequireDefault(_LoadingScene);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Fantasia = function () {
+  function Fantasia() {
+    _classCallCheck(this, Fantasia);
+
+    /**
+     * @type {PIXI.WebGLRenderer}
+     * @public
+     */
+    this.renderer = PIXI.autoDetectRenderer(1024, 576);
+
+    /**
+     * @type {HTMLElement}
+     * @private
+     */
+    this.parent_ = null;
+
+    /**
+     * @type {Scene}
+     * @private
+     */
+    this.scene_ = null;
+
+    /**
+     * @type {number}
+     * @private
+     */
+    this.lastMove_ = NaN;
+    /**
+     * @type {number}
+     * @private
+     */
+    this.sceneStarted_ = NaN;
+
+    this.runner_ = this.run.bind(this);
+  }
+  /**
+   * @param {HTMLElement} parent 
+   */
+
+
+  _createClass(Fantasia, [{
+    key: 'start',
+    value: function start(parent) {
+      this.parent_ = parent;
+      this.parent_.appendChild(this.renderer.view);
+    }
+
+    /**
+     * 
+     * @param {Scene} scene 
+     */
+
+  }, {
+    key: 'enterScene',
+    value: function enterScene(scene) {
+      if (this.scene_) {
+        this.scene_.onEnd();
+      }
+      if (scene.loadingRequired) {
+        scene = new _LoadingScene2.default(this, scene);
+      }
+      this.scene_ = scene;
+      this.sceneStarted_ = new Date().getTime();
+      if (this.scene_) {
+        this.scene_.onStart();
+      }
+    }
+  }, {
+    key: 'run',
+    value: function run() {
+      window.requestAnimationFrame(this.runner_);
+      var now = new Date().getTime();
+      if (Number.isNaN(this.lastMove_)) {
+        this.lastMove_ = now;
+      }
+      this.scene_.move(now - this.sceneStarted_, now - this.lastMove_);
+      this.lastMove_ = now;
+      this.scene_.draw(this.renderer);
+    }
+  }]);
+
+  return Fantasia;
+}();
+
+exports.default = Fantasia;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {
+
+exports.__esModule = true;
+exports.loader = exports.prepare = exports.particles = exports.mesh = exports.loaders = exports.interaction = exports.filters = exports.extras = exports.extract = exports.accessibility = undefined;
+
+var _polyfill = __webpack_require__(118);
+
+Object.keys(_polyfill).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function get() {
+            return _polyfill[key];
+        }
+    });
+});
+
+var _core = __webpack_require__(0);
+
+Object.keys(_core).forEach(function (key) {
+    if (key === "default" || key === "__esModule") return;
+    Object.defineProperty(exports, key, {
+        enumerable: true,
+        get: function get() {
+            return _core[key];
+        }
+    });
+});
+
+var _deprecation = __webpack_require__(172);
+
+var _deprecation2 = _interopRequireDefault(_deprecation);
+
+var _accessibility = __webpack_require__(173);
+
+var accessibility = _interopRequireWildcard(_accessibility);
+
+var _extract = __webpack_require__(175);
+
+var extract = _interopRequireWildcard(_extract);
+
+var _extras = __webpack_require__(75);
+
+var extras = _interopRequireWildcard(_extras);
+
+var _filters = __webpack_require__(185);
+
+var filters = _interopRequireWildcard(_filters);
+
+var _interaction = __webpack_require__(192);
+
+var interaction = _interopRequireWildcard(_interaction);
+
+var _loaders = __webpack_require__(194);
+
+var loaders = _interopRequireWildcard(_loaders);
+
+var _mesh = __webpack_require__(198);
+
+var mesh = _interopRequireWildcard(_mesh);
+
+var _particles = __webpack_require__(203);
+
+var particles = _interopRequireWildcard(_particles);
+
+var _prepare = __webpack_require__(208);
+
+var prepare = _interopRequireWildcard(_prepare);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// export core
+_core.utils.mixins.performMixins();
+
+/**
+ * Alias for {@link PIXI.loaders.shared}.
+ * @name loader
+ * @memberof PIXI
+ * @type {PIXI.loader.Loader}
+ */
+
+
+// handle mixins now, after all code has been added, including deprecation
+
+
+// export libs
+// import polyfills. Done as an export to make sure polyfills are imported first
+var loader = loaders.shared || null;
+
+exports.accessibility = accessibility;
+exports.extract = extract;
+exports.extras = extras;
+exports.filters = filters;
+exports.interaction = interaction;
+exports.loaders = loaders;
+exports.mesh = mesh;
+exports.particles = particles;
+exports.prepare = prepare;
+exports.loader = loader;
+
+// Apply the deprecations
+
+if (typeof _deprecation2.default === 'function') {
+    (0, _deprecation2.default)(exports);
+}
+
+// Always export PixiJS globally.
+global.PIXI = exports; // eslint-disable-line
+//# sourceMappingURL=index.js.map
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 exports.__esModule = true;
 
 var _utils = __webpack_require__(2);
@@ -3766,241 +4001,6 @@ var BaseTexture = function (_EventEmitter) {
 
 exports.default = BaseTexture;
 //# sourceMappingURL=BaseTexture.js.map
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _pixi = __webpack_require__(12);
-
-var PIXI = _interopRequireWildcard(_pixi);
-
-var _Scene = __webpack_require__(19);
-
-var _Scene2 = _interopRequireDefault(_Scene);
-
-var _LoadingScene = __webpack_require__(40);
-
-var _LoadingScene2 = _interopRequireDefault(_LoadingScene);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Fantasia = function () {
-  function Fantasia() {
-    _classCallCheck(this, Fantasia);
-
-    /**
-     * @type {PIXI.WebGLRenderer}
-     * @public
-     */
-    this.renderer = PIXI.autoDetectRenderer(1024, 576);
-
-    /**
-     * @type {HTMLElement}
-     * @private
-     */
-    this.parent_ = null;
-
-    /**
-     * @type {Scene}
-     * @private
-     */
-    this.scene_ = null;
-
-    /**
-     * @type {number}
-     * @private
-     */
-    this.lastMove_ = NaN;
-    /**
-     * @type {number}
-     * @private
-     */
-    this.sceneStarted_ = NaN;
-
-    this.runner_ = this.run.bind(this);
-  }
-  /**
-   * @param {HTMLElement} parent 
-   */
-
-
-  _createClass(Fantasia, [{
-    key: 'start',
-    value: function start(parent) {
-      this.parent_ = parent;
-      this.parent_.appendChild(this.renderer.view);
-    }
-
-    /**
-     * 
-     * @param {Scene} scene 
-     */
-
-  }, {
-    key: 'enterScene',
-    value: function enterScene(scene) {
-      if (this.scene_) {
-        this.scene_.onEnd();
-      }
-      if (scene.loadingRequired) {
-        scene = new _LoadingScene2.default(this, scene);
-      }
-      this.scene_ = scene;
-      this.sceneStarted_ = new Date().getTime();
-      if (this.scene_) {
-        this.scene_.onStart();
-      }
-    }
-  }, {
-    key: 'run',
-    value: function run() {
-      window.requestAnimationFrame(this.runner_);
-      var now = new Date().getTime();
-      if (Number.isNaN(this.lastMove_)) {
-        this.lastMove_ = now;
-      }
-      this.scene_.move(now - this.sceneStarted_, now - this.lastMove_);
-      this.lastMove_ = now;
-      this.scene_.draw(this.renderer);
-    }
-  }]);
-
-  return Fantasia;
-}();
-
-exports.default = Fantasia;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-exports.__esModule = true;
-exports.loader = exports.prepare = exports.particles = exports.mesh = exports.loaders = exports.interaction = exports.filters = exports.extras = exports.extract = exports.accessibility = undefined;
-
-var _polyfill = __webpack_require__(118);
-
-Object.keys(_polyfill).forEach(function (key) {
-    if (key === "default" || key === "__esModule") return;
-    Object.defineProperty(exports, key, {
-        enumerable: true,
-        get: function get() {
-            return _polyfill[key];
-        }
-    });
-});
-
-var _core = __webpack_require__(0);
-
-Object.keys(_core).forEach(function (key) {
-    if (key === "default" || key === "__esModule") return;
-    Object.defineProperty(exports, key, {
-        enumerable: true,
-        get: function get() {
-            return _core[key];
-        }
-    });
-});
-
-var _deprecation = __webpack_require__(172);
-
-var _deprecation2 = _interopRequireDefault(_deprecation);
-
-var _accessibility = __webpack_require__(173);
-
-var accessibility = _interopRequireWildcard(_accessibility);
-
-var _extract = __webpack_require__(175);
-
-var extract = _interopRequireWildcard(_extract);
-
-var _extras = __webpack_require__(75);
-
-var extras = _interopRequireWildcard(_extras);
-
-var _filters = __webpack_require__(185);
-
-var filters = _interopRequireWildcard(_filters);
-
-var _interaction = __webpack_require__(192);
-
-var interaction = _interopRequireWildcard(_interaction);
-
-var _loaders = __webpack_require__(194);
-
-var loaders = _interopRequireWildcard(_loaders);
-
-var _mesh = __webpack_require__(198);
-
-var mesh = _interopRequireWildcard(_mesh);
-
-var _particles = __webpack_require__(203);
-
-var particles = _interopRequireWildcard(_particles);
-
-var _prepare = __webpack_require__(208);
-
-var prepare = _interopRequireWildcard(_prepare);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// export core
-_core.utils.mixins.performMixins();
-
-/**
- * Alias for {@link PIXI.loaders.shared}.
- * @name loader
- * @memberof PIXI
- * @type {PIXI.loader.Loader}
- */
-
-
-// handle mixins now, after all code has been added, including deprecation
-
-
-// export libs
-// import polyfills. Done as an export to make sure polyfills are imported first
-var loader = loaders.shared || null;
-
-exports.accessibility = accessibility;
-exports.extract = extract;
-exports.extras = extras;
-exports.filters = filters;
-exports.interaction = interaction;
-exports.loaders = loaders;
-exports.mesh = mesh;
-exports.particles = particles;
-exports.prepare = prepare;
-exports.loader = loader;
-
-// Apply the deprecations
-
-if (typeof _deprecation2.default === 'function') {
-    (0, _deprecation2.default)(exports);
-}
-
-// Always export PixiJS globally.
-global.PIXI = exports; // eslint-disable-line
-//# sourceMappingURL=index.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 13 */
@@ -5540,11 +5540,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _pixi = __webpack_require__(12);
+var _pixi = __webpack_require__(11);
 
 var PIXI = _interopRequireWildcard(_pixi);
 
-var _Fantasia = __webpack_require__(11);
+var _Fantasia = __webpack_require__(10);
 
 var _Fantasia2 = _interopRequireDefault(_Fantasia);
 
@@ -5783,7 +5783,7 @@ var _TextureManager = __webpack_require__(150);
 
 var _TextureManager2 = _interopRequireDefault(_TextureManager);
 
-var _BaseTexture = __webpack_require__(10);
+var _BaseTexture = __webpack_require__(12);
 
 var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 
@@ -12497,11 +12497,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _pixi = __webpack_require__(12);
+var _pixi = __webpack_require__(11);
 
 var PIXI = _interopRequireWildcard(_pixi);
 
-var _Fantasia = __webpack_require__(11);
+var _Fantasia = __webpack_require__(10);
 
 var _Fantasia2 = _interopRequireDefault(_Fantasia);
 
@@ -15202,7 +15202,7 @@ exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _BaseTexture2 = __webpack_require__(10);
+var _BaseTexture2 = __webpack_require__(12);
 
 var _BaseTexture3 = _interopRequireDefault(_BaseTexture2);
 
@@ -16021,7 +16021,7 @@ exports.default = SystemRenderer;
 
 exports.__esModule = true;
 
-var _BaseTexture2 = __webpack_require__(10);
+var _BaseTexture2 = __webpack_require__(12);
 
 var _BaseTexture3 = _interopRequireDefault(_BaseTexture2);
 
@@ -29659,7 +29659,7 @@ function isUndefined(arg) {
 "use strict";
 
 
-var _Fantasia = __webpack_require__(11);
+var _Fantasia = __webpack_require__(10);
 
 var _Fantasia2 = _interopRequireDefault(_Fantasia);
 
@@ -42376,7 +42376,7 @@ var _Texture = __webpack_require__(7);
 
 var _Texture2 = _interopRequireDefault(_Texture);
 
-var _BaseTexture = __webpack_require__(10);
+var _BaseTexture = __webpack_require__(12);
 
 var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 
@@ -49595,13 +49595,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _pixi = __webpack_require__(12);
+var _pixi = __webpack_require__(11);
 
 var PIXI = _interopRequireWildcard(_pixi);
 
 __webpack_require__(94);
 
-var _Fantasia = __webpack_require__(11);
+var _Fantasia = __webpack_require__(10);
 
 var _Fantasia2 = _interopRequireDefault(_Fantasia);
 
@@ -50020,19 +50020,23 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _pixi = __webpack_require__(12);
+var _pixi = __webpack_require__(11);
 
 var PIXI = _interopRequireWildcard(_pixi);
 
 __webpack_require__(94);
 
-var _Fantasia = __webpack_require__(11);
+var _Fantasia = __webpack_require__(10);
 
 var _Fantasia2 = _interopRequireDefault(_Fantasia);
 
 var _Scene2 = __webpack_require__(19);
 
 var _Scene3 = _interopRequireDefault(_Scene2);
+
+var _Dialog = __webpack_require__(216);
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50129,6 +50133,18 @@ var MenuScene = function (_Scene) {
     _this.gatchaButton_.anchor.y = 0.5;
     _this.gatchaButton_.y = renderer.height / 2;
     _this.gatchaButton_.x = renderer.width * 3 / 4;
+    var gatchaTapFn = function gatchaTapFn() {
+      console.log("hey");
+      var dialog = new _Dialog2.default(_this.stage);
+      dialog.pivot.x = dialog.width / 2;
+      dialog.pivot.y = dialog.height / 2;
+      dialog.x = renderer.width / 2;
+      dialog.y = renderer.height / 2;
+      _this.stage.addChild(dialog);
+    };
+    _this.gatchaButton_.interactive = true;
+    _this.gatchaButton_.on('tap', gatchaTapFn);
+    _this.gatchaButton_.on('click', gatchaTapFn);
     return _this;
   }
 
@@ -50165,6 +50181,87 @@ var MenuScene = function (_Scene) {
 }(_Scene3.default);
 
 exports.default = MenuScene;
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _pixi = __webpack_require__(11);
+
+var PIXI = _interopRequireWildcard(_pixi);
+
+var _Fantasia = __webpack_require__(10);
+
+var _Fantasia2 = _interopRequireDefault(_Fantasia);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Dialog = function (_PIXI$Graphics) {
+  _inherits(Dialog, _PIXI$Graphics);
+
+  function Dialog() {
+    _classCallCheck(this, Dialog);
+
+    /** @type {PIXI.Graphics} */
+    var _this = _possibleConstructorReturn(this, (Dialog.__proto__ || Object.getPrototypeOf(Dialog)).call(this));
+
+    var g = _this;
+
+    g.beginFill(0x000000, 1);
+    g.drawRoundedRect(0, 0, 800, 300, 30);
+    g.beginFill(0xffffff, 1);
+    g.drawRoundedRect(5, 5, 790, 290, 30);
+    var title = new PIXI.Text("メンテナンス中");
+    title.anchor.x = 0.5;
+    title.anchor.y = 0;
+    title.x = 400;
+    title.y = 20;
+    g.beginFill(0xffdddd, 1);
+    g.drawRoundedRect(20, 10, 760, title.height + 10, 10);
+    g.addChild(title);
+
+    var text = new PIXI.Text("ただいま、緊急メンテナンスを実施しております。\n\n" + "ご利用の皆さまにはご不便をおかけいたしておりますが、\n" + "何卒ご理解とプルリクエストを宜しくお願い申し上げます。\n" + "https://github.com/open-dokidokivisual/fantasia");
+
+    text.anchor.x = 0.5;
+    text.anchor.y = 0;
+    text.x = 400;
+    text.y = 20 + title.height + 20;
+    g.addChild(text);
+
+    return _this;
+  }
+
+  /**
+   * @param {number} delta 
+   */
+
+
+  _createClass(Dialog, [{
+    key: 'move',
+    value: function move(delta) {}
+  }]);
+
+  return Dialog;
+}(PIXI.Graphics);
+
+exports.default = Dialog;
 
 /***/ })
 /******/ ]);

@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import 'pixi-sound';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
+import Dialog from '../components/Dialog';
 
 const TWITCHNG_URL = 'resources/se/character_twitching_01.mp3'
 
@@ -84,6 +85,18 @@ export default class MenuScene extends Scene {
     this.gatchaButton_.anchor.y = 0.5;
     this.gatchaButton_.y = renderer.height/2;
     this.gatchaButton_.x = renderer.width*3/4;
+    let gatchaTapFn = () => {
+      console.log("hey");
+      const dialog = new Dialog(this.stage);
+      dialog.pivot.x = dialog.width/2;
+      dialog.pivot.y = dialog.height/2;
+      dialog.x = renderer.width/2;
+      dialog.y = renderer.height/2;
+      this.stage.addChild(dialog);
+    };
+    this.gatchaButton_.interactive = true;
+    this.gatchaButton_.on('tap', gatchaTapFn);
+    this.gatchaButton_.on('click', gatchaTapFn);
   }
 
   /**
