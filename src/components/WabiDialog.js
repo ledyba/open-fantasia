@@ -38,9 +38,9 @@ export default class WabiDialog extends PIXI.Graphics {
     text.y = 20 + title.height + 20;
     g.addChild(text);
 
-    const forkButton = new Button(new PIXI.Text("See Github"), 0xffffff, 0xffdddd, 180, 60);
+    const forkButton = new Button(new PIXI.Text("Fork me on Github"), 0xffffff, 0xffdddd, 240, 60);
     g.addChild(forkButton);
-    forkButton.x = width/3 - 90;
+    forkButton.x = width/3 - 120;
     forkButton.y = height - 60 - 10;
     const forkFn = () => {
       window.open('https://github.com/open-dokidokivisual/fantasia');
@@ -48,9 +48,9 @@ export default class WabiDialog extends PIXI.Graphics {
     forkButton.on('tap', forkFn);
     forkButton.on('click', forkFn);
 
-    const closeButton = new Button(new PIXI.Text("Close"), 0xffffff, 0xffdddd, 180, 60);
+    const closeButton = new Button(new PIXI.Text("Close"), 0xffffff, 0xffdddd, 240, 60);
     g.addChild(closeButton);
-    closeButton.x = width*2/3 - 90;
+    closeButton.x = width*2/3 - 120;
     closeButton.y = height - 60 - 10;
     const closeFn = () => {
       this.parent.removeChild(this);
