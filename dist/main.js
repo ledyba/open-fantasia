@@ -50034,9 +50034,9 @@ var _Scene2 = __webpack_require__(19);
 
 var _Scene3 = _interopRequireDefault(_Scene2);
 
-var _Dialog = __webpack_require__(216);
+var _WabiDialog = __webpack_require__(217);
 
-var _Dialog2 = _interopRequireDefault(_Dialog);
+var _WabiDialog2 = _interopRequireDefault(_WabiDialog);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50134,8 +50134,7 @@ var MenuScene = function (_Scene) {
     _this.gatchaButton_.y = renderer.height / 2;
     _this.gatchaButton_.x = renderer.width * 3 / 4;
     var gatchaTapFn = function gatchaTapFn() {
-      console.log("hey");
-      var dialog = new _Dialog2.default(_this.stage);
+      var dialog = new _WabiDialog2.default(_this.stage);
       dialog.pivot.x = dialog.width / 2;
       dialog.pivot.y = dialog.height / 2;
       dialog.x = renderer.width / 2;
@@ -50183,7 +50182,117 @@ var MenuScene = function (_Scene) {
 exports.default = MenuScene;
 
 /***/ }),
-/* 216 */
+/* 216 */,
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _pixi = __webpack_require__(11);
+
+var PIXI = _interopRequireWildcard(_pixi);
+
+var _Fantasia = __webpack_require__(10);
+
+var _Fantasia2 = _interopRequireDefault(_Fantasia);
+
+var _Button = __webpack_require__(218);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WabiDialog = function (_PIXI$Graphics) {
+  _inherits(WabiDialog, _PIXI$Graphics);
+
+  function WabiDialog() {
+    _classCallCheck(this, WabiDialog);
+
+    var _this = _possibleConstructorReturn(this, (WabiDialog.__proto__ || Object.getPrototypeOf(WabiDialog)).call(this));
+
+    var width = 800;
+    var height = 300;
+
+    /** @type {PIXI.Graphics} */
+    var g = _this;
+
+    g.beginFill(0xffffff, 1);
+    g.lineStyle(5, 0x333333);
+    g.drawRoundedRect(0, 0, width, height, 30);
+    g.endFill();
+    g.lineStyle(0, 0);
+    var title = new PIXI.Text("メンテナンス中");
+    title.anchor.x = 0.5;
+    title.anchor.y = 0;
+    title.x = width / 2;
+    title.y = 20;
+    g.beginFill(0xffdddd, 1);
+    g.drawRoundedRect(20, 15, 760, title.height + 10, 10);
+    g.addChild(title);
+
+    var text = new PIXI.Text("ただいま、緊急メンテナンスを実施しております。\n\n" + "ご利用の皆さまにはご不便をおかけいたしておりますが、\n" + "何卒ご理解とプルリクエストを宜しくお願い申し上げます。\n" + "https://github.com/open-dokidokivisual/fantasia");
+
+    text.anchor.x = 0.5;
+    text.anchor.y = 0;
+    text.x = 400;
+    text.y = 20 + title.height + 20;
+    g.addChild(text);
+
+    var forkButton = new _Button2.default(new PIXI.Text("See Github"), 0xffffff, 0xffdddd, 180, 60);
+    g.addChild(forkButton);
+    forkButton.x = width / 3 - 90;
+    forkButton.y = height - 60 - 10;
+    var forkFn = function forkFn() {
+      window.open('https://github.com/open-dokidokivisual/fantasia');
+    };
+    forkButton.on('tap', forkFn);
+    forkButton.on('click', forkFn);
+
+    var closeButton = new _Button2.default(new PIXI.Text("Close"), 0xffffff, 0xffdddd, 180, 60);
+    g.addChild(closeButton);
+    closeButton.x = width * 2 / 3 - 90;
+    closeButton.y = height - 60 - 10;
+    var closeFn = function closeFn() {
+      _this.parent.removeChild(_this);
+    };
+    closeButton.on('tap', closeFn);
+    closeButton.on('click', closeFn);
+
+    return _this;
+  }
+
+  /**
+   * @param {number} delta 
+   */
+
+
+  _createClass(WabiDialog, [{
+    key: 'move',
+    value: function move(delta) {}
+  }]);
+
+  return WabiDialog;
+}(PIXI.Graphics);
+
+exports.default = WabiDialog;
+
+/***/ }),
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50213,55 +50322,107 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Dialog = function (_PIXI$Graphics) {
-  _inherits(Dialog, _PIXI$Graphics);
+var Button = function (_PIXI$Container) {
+  _inherits(Button, _PIXI$Container);
 
-  function Dialog() {
-    _classCallCheck(this, Dialog);
+  /**
+   * 
+   * @param {PIXI.Text} label 
+   * @param {number} bgColor
+   * @param {number} edgeColor
+   * @param {number} width
+   * @param {number} height
+   */
+  function Button(label, bgColor, edgeColor, width, height) {
+    _classCallCheck(this, Button);
 
-    /** @type {PIXI.Graphics} */
-    var _this = _possibleConstructorReturn(this, (Dialog.__proto__ || Object.getPrototypeOf(Dialog)).call(this));
+    var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this));
 
-    var g = _this;
+    _this.interactive = true;
+    _this.onBackground = function () {
+      var g = new PIXI.Graphics();
+      g.beginFill(edgeColor, 1);
+      g.lineStyle(5, edgeColor, 1);
+      g.drawRoundedRect(0, 0, width, height, 30);
+      g.lineStyle(0, 0);
+      g.endFill();
+      return g;
+    }();
 
-    g.beginFill(0x000000, 1);
-    g.drawRoundedRect(0, 0, 800, 300, 30);
-    g.beginFill(0xffffff, 1);
-    g.drawRoundedRect(5, 5, 790, 290, 30);
-    var title = new PIXI.Text("メンテナンス中");
-    title.anchor.x = 0.5;
-    title.anchor.y = 0;
-    title.x = 400;
-    title.y = 20;
-    g.beginFill(0xffdddd, 1);
-    g.drawRoundedRect(20, 15, 760, title.height + 10, 10);
-    g.addChild(title);
+    _this.offBackground = function () {
+      var g = new PIXI.Graphics();
+      g.beginFill(bgColor, 1);
+      g.lineStyle(3, edgeColor, 1);
+      g.drawRoundedRect(0, 0, width, height, 30);
+      g.lineStyle(0, 0);
+      g.endFill();
+      return g;
+    }();
 
-    var text = new PIXI.Text("ただいま、緊急メンテナンスを実施しております。\n\n" + "ご利用の皆さまにはご不便をおかけいたしておりますが、\n" + "何卒ご理解とプルリクエストを宜しくお願い申し上げます。\n" + "https://github.com/open-dokidokivisual/fantasia");
+    _this.addChild(_this.offBackground);
+    /** @private */
+    _this.status_ = false;
+    _this.addChild(label);
+    label.anchor.x = 0.5;
+    label.anchor.y = 0.5;
+    label.x = _this.offBackground.width / 2;
+    label.y = _this.offBackground.height / 2;
 
-    text.anchor.x = 0.5;
-    text.anchor.y = 0;
-    text.x = 400;
-    text.y = 20 + title.height + 20;
-    g.addChild(text);
+    _this.on('mousedown', function () {
+      _this.status_ = true;
+      _this.switchTo(true);
+    });
+    _this.on('mouseup', function () {
+      if (_this.status_) {
+        _this.status_ = false;
+        _this.switchTo(false);
+      }
+    });
+    _this.on('mouseout', function () {
+      if (_this.status_) {
+        _this.switchTo(false);
+      }
+    });
+    _this.on('mouseover', function () {
+      if (_this.status_) {
+        _this.switchTo(true);
+      }
+    });
 
     return _this;
   }
 
   /**
-   * @param {number} delta 
+   * 
+   * @param {boolean} status 
    */
 
 
-  _createClass(Dialog, [{
+  _createClass(Button, [{
+    key: 'switchTo',
+    value: function switchTo(status) {
+      if (status) {
+        this.removeChild(this.offBackground);
+        this.addChildAt(this.onBackground, 0);
+      } else {
+        this.removeChild(this.onBackground);
+        this.addChildAt(this.offBackground, 0);
+      }
+    }
+
+    /**
+     * @param {number} delta 
+     */
+
+  }, {
     key: 'move',
     value: function move(delta) {}
   }]);
 
-  return Dialog;
-}(PIXI.Graphics);
+  return Button;
+}(PIXI.Container);
 
-exports.default = Dialog;
+exports.default = Button;
 
 /***/ })
 /******/ ]);
