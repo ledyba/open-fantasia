@@ -49627,9 +49627,28 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BG_URL = 'resources/bg/DSC03634.JPG';
-var BGM_URL = 'resources/music/TheAutumnsOurs.mp3';
 var SE_URL = 'resources/se/button_long01.mp3';
+
+/**
+ * @returns {boolean}
+ */
+function isChristmas() {
+  var today = new Date();
+  return today.getMonth() == 11 && today.getDate() >= 20 && today.getDate() <= 25;
+}
+
+/**
+ * @returns {string}
+ */
+function selectBackgroundURL() {
+  return isChristmas() ? 'resources/bg/img605.jpg' : 'resources/bg/DSC03634.JPG';
+}
+/**
+ * @returns {string}
+ */
+function selectMusicURL() {
+  return isChristmas() ? 'resources/music/Rudolph.mp3' : 'resources/music/TheAutumnsOurs.mp3';
+}
 
 var TitleScene = function (_Scene) {
   _inherits(TitleScene, _Scene);
@@ -49676,10 +49695,11 @@ var TitleScene = function (_Scene) {
     // 背景
     /** @type {PIXI.Sprite} */
     _this.bg_ = null;
-    _this.loader.add(BG_URL);
+    _this.bgUrl_ = selectBackgroundURL();
+    _this.loader.add(_this.bgUrl_);
 
     // BGMのセットアップ
-    var bgm = BGM_URL;
+    var bgm = selectMusicURL();
     var buttonSe = SE_URL;
     _this.loader.add(bgm);
     _this.loader.add(buttonSe);
@@ -49735,7 +49755,7 @@ var TitleScene = function (_Scene) {
       var fantasia = this.fantasia;
       var renderer = fantasia.renderer;
 
-      this.bg_ = new PIXI.Sprite(this.loader.resources[BG_URL].texture);
+      this.bg_ = new PIXI.Sprite(this.loader.resources[this.bgUrl_].texture);
       this.bg_.width = renderer.width;
       this.bg_.height = renderer.height;
       this.stage.addChildAt(this.bg_, 0);

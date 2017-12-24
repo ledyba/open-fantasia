@@ -5,9 +5,28 @@ import Scene from '../Scene.js';
 import LoadingScene from './LoadingScene.js';
 import MenuScene from './MenuScene.js';
 
-const BG_URL = 'resources/bg/DSC03634.JPG';
-const BGM_URL = 'resources/music/TheAutumnsOurs.mp3';
 const SE_URL = 'resources/se/button_long01.mp3';
+
+/**
+ * @returns {boolean}
+ */
+function isChristmas() {
+  const today = new Date();
+  return today.getMonth() == 11 && (today.getDate() >= 20 && today.getDate() <= 25);
+}
+
+/**
+ * @returns {string}
+ */
+function selectBackgroundURL() {
+  return isChristmas() ? 'resources/bg/img605.jpg' : 'resources/bg/DSC03634.JPG';
+}
+/**
+ * @returns {string}
+ */
+function selectMusicURL() {
+  return isChristmas() ? 'resources/music/Rudolph.mp3' : 'resources/music/TheAutumnsOurs.mp3';
+}
 
 export default class TitleScene extends Scene {
   /**
@@ -50,10 +69,11 @@ export default class TitleScene extends Scene {
     // 背景
     /** @type {PIXI.Sprite} */
     this.bg_ = null;
-    this.loader.add(BG_URL);
+    this.bgUrl_ = selectBackgroundURL();
+    this.loader.add(this.bgUrl_);
     
     // BGMのセットアップ
-    const bgm = BGM_URL;
+    const bgm = selectMusicURL();
     const buttonSe = SE_URL;
     this.loader.add(bgm);
     this.loader.add(buttonSe);
@@ -102,7 +122,7 @@ export default class TitleScene extends Scene {
     const fantasia = this.fantasia;
     const renderer = fantasia.renderer;
     
-    this.bg_ = new PIXI.Sprite(this.loader.resources[BG_URL].texture);
+    this.bg_ = new PIXI.Sprite(this.loader.resources[this.bgUrl_].texture);
     this.bg_.width = renderer.width;
     this.bg_.height = renderer.height;
     this.stage.addChildAt(this.bg_, 0);
