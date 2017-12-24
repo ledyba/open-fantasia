@@ -49679,7 +49679,13 @@ var TitleScene = function (_Scene) {
     _this.title_.anchor.x = 0.5;
 
     // タイトル
-    _this.press_ = new PIXI.Text("タップして冒険の扉を開く", { fill: '0xffffffff' });
+    _this.press_ = new PIXI.Text("タップして冒険の扉を開く", {
+      fill: '0xffffffff',
+      dropShadow: true,
+      dropShadowBlur: 10,
+      dropShadowDistance: 0,
+      dropShadowColor: '0x000000'
+    });
     _this.stage.addChild(_this.press_);
     _this.press_.anchor.x = 0.5;
 

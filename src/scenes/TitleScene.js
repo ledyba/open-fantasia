@@ -53,7 +53,13 @@ export default class TitleScene extends Scene {
     this.title_.anchor.x = 0.5;
 
     // タイトル
-    this.press_ = new PIXI.Text("タップして冒険の扉を開く", {fill: '0xffffffff'});
+    this.press_ = new PIXI.Text("タップして冒険の扉を開く", {
+      fill: '0xffffffff',
+      dropShadow: true,
+      dropShadowBlur: 10,
+      dropShadowDistance: 0,
+      dropShadowColor: '0x000000'
+    });
     this.stage.addChild(this.press_);
     this.press_.anchor.x = 0.5;
 
