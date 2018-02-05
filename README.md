@@ -7,7 +7,11 @@
 
 # 開発に参加したい
 
-open-dokidokivisualのメンバーにするので [@tikal](https://twitter.com/tikal) に話しかけてください。（もちろんグループに参加しなくてもpull reqを送るとかでも可）
+open-dokidokivisualのメンバーにするので [@tikal](https://twitter.com/tikal) に話しかけてください。（もちろんグループに参加しなくてもpull reqを送るとかでも大歓迎）
+
+# 共生共創な企画書
+
+[![](./image2.png)](https://docs.google.com/presentation/d/1BS8i3r41_nhsjXWPJ4fjyzx6-ppF0KnI27mwLEv30CA/edit?usp=sharing)
 
 # 壮大なバックグラウンドストーリー
 
