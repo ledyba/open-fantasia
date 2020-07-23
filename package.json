@@ -1,35 +1,36 @@
 {
   "name": "fantasia",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An imaginary, but really existing social game.",
   "main": "src/main.js",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
     "test": "NODE_ENV=test mocha --require babel-register --recursive $(find . -type f -name '*.spec.js' -not -path './node_modules/*')",
-    "update": "ncu -u -a"
+    "up": "npm-check-updates --upgrade && npm install && npm audit fix"
   },
   "keywords": [
-    "kirara"
+    "kirara",
+    "open-dokidokivisual"
   ],
-  "author": "open-kirara project",
-  "license": "BSD-2-Clause",
+  "author": "open-dokidokivisual project",
+  "license": "CC-BY-SA-4.0",
   "devDependencies": {
-    "@types/pixi.js": "^4.8.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "npm-check-updates": "^2.14.2",
-    "webpack": "^4.13.0",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4",
-    "write-file-webpack-plugin": "^4.3.2"
+    "@types/pixi.js": "^5.0.0",
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.5",
+    "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "npm-check-updates": "^7.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "write-file-webpack-plugin": "^4.5.1"
   },
   "dependencies": {
-    "pixi-sound": "^2.0.2",
-    "pixi.js": "^4.8.1"
+    "pixi-sound": "^3.0.5",
+    "pixi.js": "^5.3.0"
   }
 }

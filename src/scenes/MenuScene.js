@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import 'pixi-sound';
+import sound from 'pixi-sound';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
 import WabiDialog from '../components/WabiDialog.js';
@@ -50,7 +50,7 @@ export default class MenuScene extends Scene {
     // キャラSE
     const characterSe = TWITCHNG_URL;
     this.loader.add(characterSe);
-    this.characterSe_ = PIXI.sound.Sound.from(characterSe);
+    this.characterSe_ = sound.Sound.from(characterSe);
     let characterTapFn = () => {
       this.characterSe_.play();
       if(this.characterTapCnt_ > 0) {

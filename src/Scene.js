@@ -20,7 +20,7 @@ export default class Scene {
     this.stage = new PIXI.Container();
 
     /**
-     * @type {PIXI.loaders.Loader}
+     * @type {PIXI.Loader}
      * @private
      */
     this.loader_ = null;
@@ -37,8 +37,8 @@ export default class Scene {
    */
   get loader() {
     if(!this.loader_){
-      this.loader_ = new PIXI.loaders.Loader();
-      this.loader_.once('complete', () =>{
+      this.loader_ = new PIXI.Loader();
+      this.loader_.onComplete.once(() =>{
         this.loaded_ = true;
       });
     }

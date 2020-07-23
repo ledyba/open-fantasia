@@ -98,7 +98,7 @@ export default class LoadingScene extends Scene{
     if(this.error_ === null){
       this.fantasia.enterScene(this.nextScene_);
     } else {
-      log.error("Error when loading: ", this.error_);
+      console.error("Error when loading: ", this.error_);
     }
   }
 };

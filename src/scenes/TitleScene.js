@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import 'pixi-sound';
+import sound from 'pixi-sound';
 import Fantasia from '../Fantasia.js';
 import Scene from '../Scene.js';
 import LoadingScene from './LoadingScene.js';
@@ -66,8 +66,14 @@ export default class TitleScene extends Scene {
     // クリックを検知するための設定
     this.clickTarget_ = new PIXI.Graphics();
     this.clickTarget_.beginFill(0x000000,0.0);
+    this.clickTarget_.x = 0;
+    this.clickTarget_.y = 0;
+    this.clickTarget_.width = renderer.width;
+    this.clickTarget_.height = renderer.height;
     this.clickTarget_.drawRect(0, 0, renderer.width, renderer.height);
+    this.clickTarget_.hitArea = new PIXI.Rectangle(0, 0, renderer.width, renderer.height);
     this.clickTarget_.interactive = true;
+    this.clickTarget_.zIndex = -1;
     this.clickTarget_.on("tap", this.onTap.bind(this));
     this.clickTarget_.on("click", this.onTap.bind(this));
     this.stage.addChild(this.clickTarget_);
@@ -84,8 +90,8 @@ export default class TitleScene extends Scene {
     this.loader.add(bgm);
     this.loader.add(buttonSe);
     
-    this.sound_ = PIXI.sound.Sound.from(bgm);
-    this.buttonSe_ = PIXI.sound.Sound.from(buttonSe);
+    this.sound_ = sound.Sound.from(bgm);
+    this.buttonSe_ = sound.Sound.from(buttonSe);
 
     this.buttonFreq_ = 400;
   }
