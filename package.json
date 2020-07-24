@@ -18,7 +18,7 @@
   "license": "CC-BY-SA-4.0",
   "devDependencies": {
     "@types/pixi.js": "^5.0.0",
-    "@types/jest": "^26.0.5",
+    "@types/jest": "^26.0.7",
     "jest": "^26.1.0",
     "npm-check-updates": "^7.0.2",
     "webpack": "^4.43.0",
