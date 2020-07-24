@@ -8,12 +8,12 @@ import Map from './field/Map'
  * ローグライクのフィールド画面を表すScene
  */
 export default class FieldScene extends Scene {
-  private readonly map_: Map;
+  private readonly map: Map;
   constructor(fantasia: Fantasia) {
     super(fantasia);
 
     /** @private */
-    this.map_ = new Map(40,30);
+    this.map = new Map(40,30);
 
   }
 

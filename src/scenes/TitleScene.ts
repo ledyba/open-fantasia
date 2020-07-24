@@ -20,14 +20,14 @@ function selectMusicURL(): string {
 }
 
 export default class TitleScene extends Scene {
-  private readonly title_: PIXI.Text;
-  private readonly press_: PIXI.Text;
-  private readonly clickTarget_: PIXI.Graphics;
-  private bg_: PIXI.Sprite | null;
-  private readonly bgUrl_: string;
-  private readonly sound_: PIXI.sound.Sound;
-  private readonly buttonSe_: PIXI.sound.Sound;
-  private buttonFreq_: number;
+  private readonly title: PIXI.Text;
+  private readonly press: PIXI.Text;
+  private readonly clickTarget: PIXI.Graphics;
+  private bg: PIXI.Sprite | null;
+  private readonly bgUrl: string;
+  private readonly sound: PIXI.sound.Sound;
+  private readonly buttonSe: PIXI.sound.Sound;
+  private buttonFreq: number;
   constructor(fantasia: Fantasia) {
     super(fantasia);
 
@@ -36,7 +36,7 @@ export default class TitleScene extends Scene {
     // TODO: 全部絵にするか、もう少し飾りをつける。
 
     // タイトル
-    this.title_ = new PIXI.Text("オープンファンタジア", {
+    this.title = new PIXI.Text("オープンファンタジア", {
       fill: '0xffffffff',
       fontSize: 48,
       dropShadow: true,
@@ -44,40 +44,40 @@ export default class TitleScene extends Scene {
       dropShadowDistance: 0,
       dropShadowColor: '0x000000'
     });
-    this.stage.addChild(this.title_);
-    this.title_.anchor.x = 0.5;
+    this.stage.addChild(this.title);
+    this.title.anchor.x = 0.5;
 
     // タイトル
-    this.press_ = new PIXI.Text("タップして冒険の扉を開く", {
+    this.press = new PIXI.Text("タップして冒険の扉を開く", {
       fill: '0xffffffff',
       dropShadow: true,
       dropShadowBlur: 10,
       dropShadowDistance: 0,
       dropShadowColor: '0x000000'
     });
-    this.stage.addChild(this.press_);
-    this.press_.anchor.x = 0.5;
+    this.stage.addChild(this.press);
+    this.press.anchor.x = 0.5;
 
     // クリックを検知するための設定
-    this.clickTarget_ = new PIXI.Graphics();
-    this.clickTarget_.beginFill(0x000000,0.0);
-    this.clickTarget_.x = 0;
-    this.clickTarget_.y = 0;
-    this.clickTarget_.width = renderer.width;
-    this.clickTarget_.height = renderer.height;
-    this.clickTarget_.drawRect(0, 0, renderer.width, renderer.height);
-    this.clickTarget_.hitArea = new PIXI.Rectangle(0, 0, renderer.width, renderer.height);
-    this.clickTarget_.interactive = true;
-    this.clickTarget_.zIndex = -1;
-    this.clickTarget_.on("tap", this.onTap.bind(this));
-    this.clickTarget_.on("click", this.onTap.bind(this));
-    this.stage.addChild(this.clickTarget_);
+    this.clickTarget = new PIXI.Graphics();
+    this.clickTarget.beginFill(0x000000,0.0);
+    this.clickTarget.x = 0;
+    this.clickTarget.y = 0;
+    this.clickTarget.width = renderer.width;
+    this.clickTarget.height = renderer.height;
+    this.clickTarget.drawRect(0, 0, renderer.width, renderer.height);
+    this.clickTarget.hitArea = new PIXI.Rectangle(0, 0, renderer.width, renderer.height);
+    this.clickTarget.interactive = true;
+    this.clickTarget.zIndex = -1;
+    this.clickTarget.on("tap", this.onTap.bind(this));
+    this.clickTarget.on("click", this.onTap.bind(this));
+    this.stage.addChild(this.clickTarget);
 
     // 背景
     /** @type {PIXI.Sprite} */
-    this.bg_ = null;
-    this.bgUrl_ = selectBackgroundURL();
-    this.loader.add(this.bgUrl_);
+    this.bg = null;
+    this.bgUrl = selectBackgroundURL();
+    this.loader.add(this.bgUrl);
     
     // BGMのセットアップ
     const bgm = selectMusicURL();
@@ -85,10 +85,10 @@ export default class TitleScene extends Scene {
     this.loader.add(bgm);
     this.loader.add(buttonSe);
     
-    this.sound_ = PIXIsound.Sound.from(bgm);
-    this.buttonSe_ = PIXIsound.Sound.from(buttonSe);
+    this.sound = PIXIsound.Sound.from(bgm);
+    this.buttonSe = PIXIsound.Sound.from(buttonSe);
 
-    this.buttonFreq_ = 400;
+    this.buttonFreq = 400;
   }
 
   move(elapsed: number, delta: number) {
@@ -96,43 +96,43 @@ export default class TitleScene extends Scene {
 
     // タイトルをうにょうにょさせる
     const sin = Math.sin(elapsed / 300);
-    this.title_.x = renderer.width/2 - sin * 5;
-    this.title_.y = 90 + sin * 5;
+    this.title.x = renderer.width/2 - sin * 5;
+    this.title.y = 90 + sin * 5;
 
     // 開始メッセージを点滅させる
-    this.press_.x = renderer.width/2;
-    this.press_.y = renderer.height*3/4;
-    this.press_.alpha = Math.abs(Math.sin(elapsed / this.buttonFreq_));
+    this.press.x = renderer.width/2;
+    this.press.y = renderer.height*3/4;
+    this.press.alpha = Math.abs(Math.sin(elapsed / this.buttonFreq));
   }
 
   onTap() {
-    if(this.buttonSe_.isPlaying) {
+    if(this.buttonSe.isPlaying) {
       return;
     }
     // メニューシーンへ移動
     const fantasia = this.fantasia;
-    this.buttonFreq_ = 150;
-    this.sound_.volume=0.7;
-    this.buttonSe_.volume = 2;
-    this.buttonSe_.play("", () => {
+    this.buttonFreq = 150;
+    this.sound.volume=0.7;
+    this.buttonSe.volume = 2;
+    this.buttonSe.play("", () => {
       fantasia.enterScene(new MenuScene(fantasia));
     });
   }
 
   onStart() {
     super.onStart();
-    this.sound_.play();
+    this.sound.play();
     const fantasia = this.fantasia;
     const renderer = fantasia.renderer;
     
-    this.bg_ = new PIXI.Sprite(this.loader.resources[this.bgUrl_].texture);
-    this.bg_.width = renderer.width;
-    this.bg_.height = renderer.height;
-    this.stage.addChildAt(this.bg_, 0);
+    this.bg = new PIXI.Sprite(this.loader.resources[this.bgUrl].texture);
+    this.bg.width = renderer.width;
+    this.bg.height = renderer.height;
+    this.stage.addChildAt(this.bg, 0);
     
   }
   onEnd() {
     super.onEnd();
-    this.sound_.stop();
+    this.sound.stop();
   }
 }

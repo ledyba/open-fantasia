@@ -3,12 +3,12 @@ import Fantasia from '../Fantasia';
 import Scene from '../Scene'
 
 export default class LoadingScene extends Scene {
-  private readonly nextScene_: Scene;
+  private readonly nextScene: Scene;
   private readonly loadingText: PIXI.Text;
   private error: string | null;
   constructor(fantasia: Fantasia, nextScene: Scene) {
     super(fantasia);
-    this.nextScene_ = nextScene;
+    this.nextScene = nextScene;
 
     const text = new PIXI.Text("", {fill: '0xffffffff'});
     this.loadingText = text;
@@ -39,7 +39,7 @@ export default class LoadingScene extends Scene {
    * @param {number} delta 
    */
   move(elapsed: number, delta: number) {
-    const loader = this.nextScene_.loader;
+    const loader = this.nextScene.loader;
 
     if(!!this.error) {
       this.loadingText.style.fill = "red";
@@ -77,7 +77,7 @@ export default class LoadingScene extends Scene {
     console.log("Loaded.");
     // 次のシーンへ
     if(!this.error){
-      this.fantasia.enterScene(this.nextScene_);
+      this.fantasia.enterScene(this.nextScene);
     } else {
       console.error("Error when loading: ", this.error);
     }

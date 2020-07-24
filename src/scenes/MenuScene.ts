@@ -6,11 +6,11 @@ import WabiDialog from '../components/WabiDialog';
 const TWITCHNG_URL = 'resources/se/character_twitching_01.mp3'
 
 export default class MenuScene extends Scene {
-  private readonly title_: PIXI.Text;
-  private readonly character_: PIXI.Sprite;
-  private characterTapCnt_: number;
-  private readonly characterSe_: PIXI.sound.Sound;
-  private readonly gatchaButton_: PIXI.Sprite;
+  private readonly title: PIXI.Text;
+  private readonly character: PIXI.Sprite;
+  private characterTapCnt: number;
+  private readonly characterSe: PIXI.sound.Sound;
+  private readonly gatchaButton: PIXI.Sprite;
   constructor(fantasia: Fantasia) {
     super(fantasia);
 
@@ -19,16 +19,16 @@ export default class MenuScene extends Scene {
     // タイトル
     // TODO: だいたい「何か」が左上にあるのは間違いないが、
     // 「それっぽさ」的にはタイトルおいとけばいいのか？
-    this.title_ = new PIXI.Text("オープンファンタジア", {fill: '0xffffffff'});
-    this.stage.addChild(this.title_);
-    this.title_.anchor.x = 0;
-    this.title_.x = 10;
-    this.title_.y = 10;
+    this.title = new PIXI.Text("オープンファンタジア", {fill: '0xffffffff'});
+    this.stage.addChild(this.title);
+    this.title.anchor.x = 0;
+    this.title.x = 10;
+    this.title.y = 10;
 
     // ソシャゲのメニュー画面と言えばキャラの立ち絵
     /** @type {PIXI.Sprite} */
     // TODO: ランダムなキャラ画像に差し替える
-    this.character_ = (() => {
+    this.character = (() => {
       const g = new PIXI.Graphics();
       g.beginFill(0xffffff, 1);
       g.drawRoundedRect(0, 0, 300, 400, 30);
@@ -45,31 +45,31 @@ export default class MenuScene extends Scene {
       renderer.render(g, rt);
       return new PIXI.Sprite(rt);
     })();
-    this.character_.anchor.x = 0.5;
-    this.character_.anchor.y = 0.5;
-    this.character_.y = renderer.height/2;
-    this.character_.x = renderer.width/3;
-    this.character_.interactive = true;
-    this.characterTapCnt_ = 0;
+    this.character.anchor.x = 0.5;
+    this.character.anchor.y = 0.5;
+    this.character.y = renderer.height/2;
+    this.character.x = renderer.width/3;
+    this.character.interactive = true;
+    this.characterTapCnt = 0;
     // キャラSE
     const characterSe = TWITCHNG_URL;
     this.loader.add(characterSe);
-    this.characterSe_ = PIXIsound.Sound.from(characterSe);
+    this.characterSe = PIXIsound.Sound.from(characterSe);
     let characterTapFn = () => {
-      this.characterSe_.play();
-      if(this.characterTapCnt_ > 0) {
+      this.characterSe.play();
+      if(this.characterTapCnt > 0) {
         return;
       }
-      this.characterTapCnt_ = 300;
+      this.characterTapCnt = 300;
     };
-    this.character_.on('tap', characterTapFn);
-    this.character_.on('click', characterTapFn);
-    this.stage.addChild(this.character_);
+    this.character.on('tap', characterTapFn);
+    this.character.on('click', characterTapFn);
+    this.stage.addChild(this.character);
 
     // ソシャゲと言えば、ガチャ。
     // TODO: 絵でボタンを書き直す
     /** @type {PIXI.Sprite} */
-    this.gatchaButton_ = (() => {
+    this.gatchaButton = (() => {
       const g = new PIXI.Graphics();
       g.beginFill(0xffffff, 1);
       g.drawCircle(200, 200, 200);
@@ -86,11 +86,11 @@ export default class MenuScene extends Scene {
       renderer.render(g, rt);
       return new PIXI.Sprite(rt);
     })();
-    this.stage.addChild(this.gatchaButton_);
-    this.gatchaButton_.anchor.x = 0.5;
-    this.gatchaButton_.anchor.y = 0.5;
-    this.gatchaButton_.y = renderer.height/2;
-    this.gatchaButton_.x = renderer.width*3/4;
+    this.stage.addChild(this.gatchaButton);
+    this.gatchaButton.anchor.x = 0.5;
+    this.gatchaButton.anchor.y = 0.5;
+    this.gatchaButton.y = renderer.height/2;
+    this.gatchaButton.x = renderer.width*3/4;
     let gatchaTapFn = () => {
       const dialog = new WabiDialog();
       dialog.pivot.x = dialog.width/2;
@@ -99,19 +99,19 @@ export default class MenuScene extends Scene {
       dialog.y = renderer.height/2;
       this.stage.addChild(dialog);
     };
-    this.gatchaButton_.interactive = true;
-    this.gatchaButton_.on('tap', gatchaTapFn);
-    this.gatchaButton_.on('click', gatchaTapFn);
+    this.gatchaButton.interactive = true;
+    this.gatchaButton.on('tap', gatchaTapFn);
+    this.gatchaButton.on('click', gatchaTapFn);
   }
 
   move(elapsed: number, delta: number) {
     const renderer = this.fantasia.renderer;
 
     // キャラを動かす
-    const charaCnt = 300 - this.characterTapCnt_;
-    this.character_.y = renderer.height/2 - 10 * Math.exp(-charaCnt/150) * Math.abs(Math.sin(charaCnt / 50));
-    this.character_.x = renderer.width/3;
-    this.characterTapCnt_ = Math.max(this.characterTapCnt_ - delta, 0);
+    const charaCnt = 300 - this.characterTapCnt;
+    this.character.y = renderer.height/2 - 10 * Math.exp(-charaCnt/150) * Math.abs(Math.sin(charaCnt / 50));
+    this.character.x = renderer.width/3;
+    this.characterTapCnt = Math.max(this.characterTapCnt - delta, 0);
   }
 
   onStart() {
