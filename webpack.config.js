@@ -4,7 +4,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin');
 module.exports = {
   context: __dirname,
   entry: {
-    'main': './src/main.js',
+    'main':  __dirname + '/src/main.ts',
   },
   output: {
     path: __dirname + '/dist',
@@ -16,11 +16,12 @@ module.exports = {
   ],
   module: {
     rules: [{
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: ["@babel/env"]
-      },
-    }]
+        test: /\.ts$/,
+        use: 'ts-loader'
+      }]
+  },
+  resolve: {
+    modules: ["node_modules"],
+    extensions: [ '.ts', '.js'],
   }
 };

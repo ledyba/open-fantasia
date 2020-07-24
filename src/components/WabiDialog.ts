@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js';
-import Fantasia from '../Fantasia.js';
-import Button from './Button.js'
+import Button from './Button'
 
 export default class WabiDialog extends PIXI.Graphics {
   constructor() {
@@ -9,8 +8,7 @@ export default class WabiDialog extends PIXI.Graphics {
     const width = 800;
     const height = 300;
 
-    /** @type {PIXI.Graphics} */
-    const g = this;
+    const g: PIXI.Graphics = this;
     
     g.beginFill(0xffffff, 1);
     g.lineStyle(5, 0x333333);
@@ -60,9 +58,6 @@ export default class WabiDialog extends PIXI.Graphics {
     
   }
 
-  /**
-   * @param {number} delta 
-   */
-  move(delta) {
+  move(delta: number) {
   }
 }

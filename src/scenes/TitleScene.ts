@@ -1,39 +1,34 @@
 import * as PIXI from 'pixi.js';
-import sound from 'pixi-sound';
-import Fantasia from '../Fantasia.js';
-import Scene from '../Scene.js';
-import LoadingScene from './LoadingScene.js';
-import MenuScene from './MenuScene.js';
+import PIXIsound from 'pixi-sound';
+import Fantasia from '../Fantasia';
+import Scene from '../Scene';
+import MenuScene from './MenuScene';
 
 const SE_URL = 'resources/se/button_long01.mp3';
 
-/**
- * @returns {boolean}
- */
-function isChristmas() {
+function isChristmas():boolean {
   const today = new Date();
   return today.getMonth() == 11 && (today.getDate() >= 20 && today.getDate() <= 25);
 }
 
-/**
- * @returns {string}
- */
-function selectBackgroundURL() {
+function selectBackgroundURL():string {
   return isChristmas() ? 'resources/bg/img605.jpg' : 'resources/bg/DSC03634.JPG';
 }
-/**
- * @returns {string}
- */
-function selectMusicURL() {
+
+function selectMusicURL(): string {
   return isChristmas() ? 'resources/music/Rudolph.mp3' : 'resources/music/TheAutumnsOurs.mp3';
 }
 
 export default class TitleScene extends Scene {
-  /**
-   * 
-   * @param {Fantasia} fantasia 
-   */
-  constructor(fantasia) {
+  private readonly title_: PIXI.Text;
+  private readonly press_: PIXI.Text;
+  private readonly clickTarget_: PIXI.Graphics;
+  private bg_: PIXI.Sprite | null;
+  private readonly bgUrl_: string;
+  private readonly sound_: PIXI.sound.Sound;
+  private readonly buttonSe_: PIXI.sound.Sound;
+  private buttonFreq_: number;
+  constructor(fantasia: Fantasia) {
     super(fantasia);
 
     const renderer = fantasia.renderer;
@@ -90,17 +85,13 @@ export default class TitleScene extends Scene {
     this.loader.add(bgm);
     this.loader.add(buttonSe);
     
-    this.sound_ = sound.Sound.from(bgm);
-    this.buttonSe_ = sound.Sound.from(buttonSe);
+    this.sound_ = PIXIsound.Sound.from(bgm);
+    this.buttonSe_ = PIXIsound.Sound.from(buttonSe);
 
     this.buttonFreq_ = 400;
   }
 
-  /**
-   * @param {number} elapsed 
-   * @param {number} delta 
-   */
-  move(elapsed, delta) {
+  move(elapsed: number, delta: number) {
     const renderer = this.fantasia.renderer;
 
     // タイトルをうにょうにょさせる

@@ -1,15 +1,12 @@
 import * as PIXI from 'pixi.js';
-import Fantasia from '../Fantasia.js';
-import Scene from '../Scene.js';
+import Fantasia from '../Fantasia';
+import Scene from '../Scene'
 
-export default class LoadingScene extends Scene{
-  /**
-   * 
-   * @param {Fantasia} fantasia 
-   * @param {string[]} resources
-   * @param {Scene} nextScene
-   */
-  constructor(fantasia, nextScene) {
+export default class LoadingScene extends Scene {
+  private readonly nextScene_: Scene;
+  private readonly loadingText: PIXI.Text;
+  private error: string | null;
+  constructor(fantasia: Fantasia, nextScene: Scene) {
     super(fantasia);
     this.nextScene_ = nextScene;
 
@@ -21,7 +18,7 @@ export default class LoadingScene extends Scene{
     text.x = fantasia.renderer.width - 10;
     text.y = fantasia.renderer.height - 10;
     //
-    const loader = nextScene.loader_;
+    const loader = nextScene.loader;
     if(!loader) {
       throw new Error("We don't need to load anything.");
     }
@@ -31,23 +28,20 @@ export default class LoadingScene extends Scene{
     // called once per loaded file
     loader.onLoad.add(this.onLoad.bind(this));
     // called once when the queued resources all load.
-    loader.load(this.onComplete.bind(this));
+    loader.onComplete.add(this.onComplete.bind(this));
+    loader.load();
 
-    /**
-     * @type {string}
-     * @private
-     */
-    this.error_ = null;
+    this.error = null;
   }
 
   /**
    * @param {number} elapsed 
    * @param {number} delta 
    */
-  move(elapsed, delta) {
+  move(elapsed: number, delta: number) {
     const loader = this.nextScene_.loader;
 
-    if(this.error_ !== null) {
+    if(!!this.error) {
       this.loadingText.style.fill = "red";
     }
     
@@ -70,35 +64,22 @@ export default class LoadingScene extends Scene{
     // いまのところこれ以上何もしないけど、キャラが動いたりするのも良いかもしれない。
   }
 
-  /**
-   * @param {Error} err
-   * @param {PIXI.loaders.Loader} loader 
-   * @param {*} resources 
-   */
-  onError(err, loader, resource) {
+  onError(err: Error, loader: PIXI.Loader, resource: PIXI.resources.Resource) {
     console.error(err);
-    this.error_ = err.message;
-  }
-  /**
-   * @param {Error} err
-   * @param {PIXI.loaders.Loader} loader 
-   * @param {PIXI.loaders.Resource} resource
-   */
-  onLoad(loader, resource) {
-    console.log('['+resource.progressChunk.toFixed(2)+'%] ', resource.name);
+    this.error = err.message;
   }
 
-  /**
-   * @param {PIXI.loaders.Loader} loader 
-   * @param {PIXI.loaders.Resource} resource
-   */
-  onComplete(loader, resources) {
+  onLoad(loader: PIXI.Loader, resources: Partial<Record<string, PIXI.LoaderResource>>) {
+    console.log('['+loader.progress.toFixed(2)+'%]', resources.name);
+  }
+
+  onComplete(loader:  PIXI.Loader, resource: PIXI.resources.Resource) {
     console.log("Loaded.");
     // 次のシーンへ
-    if(this.error_ === null){
+    if(!this.error){
       this.fantasia.enterScene(this.nextScene_);
     } else {
-      console.error("Error when loading: ", this.error_);
+      console.error("Error when loading: ", this.error);
     }
   }
 };

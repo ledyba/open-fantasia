@@ -2,15 +2,11 @@ import * as PIXI from 'pixi.js';
 import Fantasia from '../Fantasia.js';
 
 export default class Button extends PIXI.Container {
-  /**
-   * 
-   * @param {PIXI.Text} label 
-   * @param {number} bgColor
-   * @param {number} edgeColor
-   * @param {number} width
-   * @param {number} height
-   */
-  constructor(label, bgColor, edgeColor, width, height) {
+
+  private readonly onBackground: PIXI.Graphics;
+  private readonly offBackground: PIXI.Graphics;
+  private status: boolean;
+  constructor(label: PIXI.Text, bgColor: number, edgeColor: number, width: number, height: number) {
     super();
     this.interactive = true;
     this.onBackground = (()=>{
@@ -34,8 +30,7 @@ export default class Button extends PIXI.Container {
     })();
 
     this.addChild(this.offBackground);
-    /** @private */
-    this.status_ = false;
+    this.status = false;
     this.addChild(label);
     label.anchor.x = 0.5;
     label.anchor.y = 0.5;
@@ -46,33 +41,29 @@ export default class Button extends PIXI.Container {
      * FIXME: おした状態でmouseoutした時の状態の整合性がおかしいのを直す
      */
     this.on('mousedown', () => {
-      this.status_ = true;
+      this.status = true;
       this.switchTo(true);
     });
     this.on('mouseup', () => {
-      if(this.status_) {
-        this.status_ = false;
+      if(this.status) {
+        this.status = false;
         this.switchTo(false);
       }
     });
     this.on('mouseout', () => {
-      if(this.status_) {
+      if(this.status) {
         this.switchTo(false);
       }
     });
     this.on('mouseover', () => {
-      if(this.status_) {
+      if(this.status) {
         this.switchTo(true);
       }
     });
       
   }
 
-  /**
-   * 
-   * @param {boolean} status 
-   */
-  switchTo(status) {
+  switchTo(status: boolean) {
     if(status) {
       this.removeChild(this.offBackground);
       this.addChildAt(this.onBackground, 0);
@@ -82,9 +73,6 @@ export default class Button extends PIXI.Container {
     }
   }
 
-  /**
-   * @param {number} delta 
-   */
-  move(delta) {
+  move(delta: number) {
   }
 }

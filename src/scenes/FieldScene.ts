@@ -1,18 +1,15 @@
 import * as PIXI from 'pixi.js';
 import 'pixi-sound';
-import Fantasia from '../Fantasia.js';
-import Scene from '../Scene.js';
-import Map from './field/Map.js'
+import Fantasia from '../Fantasia';
+import Scene from '../Scene';
+import Map from './field/Map'
 
 /**
  * ローグライクのフィールド画面を表すScene
  */
 export default class FieldScene extends Scene {
-  /**
-   * 
-   * @param {Fantasia} fantasia 
-   */
-  constructor(fantasia) {
+  private readonly map_: Map;
+  constructor(fantasia: Fantasia) {
     super(fantasia);
 
     /** @private */
@@ -20,14 +17,8 @@ export default class FieldScene extends Scene {
 
   }
 
-  /**
-   * @param {number} elapsed 
-   * @param {number} delta 
-   * @override
-   */
-  move(elapsed, delta) {
+  move(elapsed: number, delta: number) {
     const renderer = this.fantasia.renderer;
-
   }
 
   /**

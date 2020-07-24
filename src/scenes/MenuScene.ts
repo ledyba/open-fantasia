@@ -1,16 +1,17 @@
 import * as PIXI from 'pixi.js';
-import sound from 'pixi-sound';
-import Fantasia from '../Fantasia.js';
-import Scene from '../Scene.js';
-import WabiDialog from '../components/WabiDialog.js';
+import PIXIsound from 'pixi-sound';
+import Fantasia from '../Fantasia';
+import Scene from '../Scene';
+import WabiDialog from '../components/WabiDialog';
 const TWITCHNG_URL = 'resources/se/character_twitching_01.mp3'
 
 export default class MenuScene extends Scene {
-  /**
-   * 
-   * @param {Fantasia} fantasia 
-   */
-  constructor(fantasia) {
+  private readonly title_: PIXI.Text;
+  private readonly character_: PIXI.Sprite;
+  private characterTapCnt_: number;
+  private readonly characterSe_: PIXI.sound.Sound;
+  private readonly gatchaButton_: PIXI.Sprite;
+  constructor(fantasia: Fantasia) {
     super(fantasia);
 
     const renderer = fantasia.renderer;
@@ -37,7 +38,10 @@ export default class MenuScene extends Scene {
       text.x = 150;
       text.y = 200;
       g.addChild(text);
-      const rt = PIXI.RenderTexture.create(g.width, g.height);
+      const rt = PIXI.RenderTexture.create({
+        width: g.width,
+        height: g.height,
+      });
       renderer.render(g, rt);
       return new PIXI.Sprite(rt);
     })();
@@ -50,7 +54,7 @@ export default class MenuScene extends Scene {
     // キャラSE
     const characterSe = TWITCHNG_URL;
     this.loader.add(characterSe);
-    this.characterSe_ = sound.Sound.from(characterSe);
+    this.characterSe_ = PIXIsound.Sound.from(characterSe);
     let characterTapFn = () => {
       this.characterSe_.play();
       if(this.characterTapCnt_ > 0) {
@@ -75,7 +79,10 @@ export default class MenuScene extends Scene {
       text.x = 200;
       text.y = 200;
       g.addChild(text);
-      const rt = PIXI.RenderTexture.create(g.width, g.height);
+      const rt = PIXI.RenderTexture.create({
+        width: g.width,
+        height: g.height,
+      });
       renderer.render(g, rt);
       return new PIXI.Sprite(rt);
     })();
@@ -85,7 +92,7 @@ export default class MenuScene extends Scene {
     this.gatchaButton_.y = renderer.height/2;
     this.gatchaButton_.x = renderer.width*3/4;
     let gatchaTapFn = () => {
-      const dialog = new WabiDialog(this.stage);
+      const dialog = new WabiDialog();
       dialog.pivot.x = dialog.width/2;
       dialog.pivot.y = dialog.height/2;
       dialog.x = renderer.width/2;
@@ -97,11 +104,7 @@ export default class MenuScene extends Scene {
     this.gatchaButton_.on('click', gatchaTapFn);
   }
 
-  /**
-   * @param {number} elapsed 
-   * @param {number} delta 
-   */
-  move(elapsed, delta) {
+  move(elapsed: number, delta: number) {
     const renderer = this.fantasia.renderer;
 
     // キャラを動かす

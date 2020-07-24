@@ -1,42 +1,25 @@
 export default class Map {
-  /**
-   * 
-   * @param {number} w 
-   * @param {number} h 
-   */
-  constructor(w,h) {
+  private readonly width: number;
+  private readonly height: number;
+  private readonly field_: number[];
+  constructor(w: number,h: number) {
     this.width = w;
     this.height = h;
     this.field_ = new Array(w * h);
   }
 
-  /**
-   * 
-   * @param {number} x 
-   * @param {number} y 
-   * @returns {number}
-   * @private
-   */
-  calcIndex_(x,y) {
+  private calcIndex_(x: number,y: number): number {
     if(x < 0 || x >= this.width || y < 0 || y >= this.height) {
       throw new Error("invalid index");
     }
     return y * this.width + x;
   }
 
-  /**
-   * @param {number} x 
-   * @param {number} y 
-   */
-  at(x, y) {
+  at(x: number, y: number) {
     return this.field_[this.calcIndex_(x,y)];
   }
 
-  /**
-   * @param {number} x 
-   * @param {number} y 
-   */
-  set(x, y, v) {
+  set(x: number, y: number, v: number) {
     const idx = this.calcIndex_(x,y);
     const old = this.field_[idx];
     this.field_[idx] = v;
