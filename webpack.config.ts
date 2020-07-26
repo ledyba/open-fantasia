@@ -1,7 +1,7 @@
-const path = require('path');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+import WriteFilePlugin from 'write-file-webpack-plugin';
+import webpack from 'webpack';
 
-module.exports = {
+const conf: webpack.Configuration = {
   context: __dirname,
   entry: {
     'main':  __dirname + '/src/main.ts',
@@ -25,3 +25,5 @@ module.exports = {
     extensions: [ '.ts', '.js'],
   }
 };
+
+export default conf;
